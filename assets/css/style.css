@@ -1,0 +1,37 @@
+/* Color Palette 
+ 
+*/
+
+/* GLobal styles
+--------------------*/
+
+body{
+    background-image: url("../images/background.jpg"); /* Photo by Galen Crout on Unsplash */
+    background-size: cover;
+    color: #383838;        
+    font-size: 1em; 
+    font-family: Georgia, 'Times New Roman', Times, serif;    
+    height: 100%;
+    margin-left: 160px;
+ }
+
+ h2 {
+     font-size: 1em;
+     font-weight: 600;
+ }
+/* Main body styles
+--------------------*/
+
+#rating, #description, #difficulty, #directions, #weather {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+#hike-display{
+    visibility: visible; 
+}
+
+#submit-button{
+    background-color: gray;
+    border: none;
+}
+

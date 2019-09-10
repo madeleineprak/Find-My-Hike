@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" class="h-100">
+
+<head> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>Find My Hike</title>
+     <!--// bootstrap stylesheet-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <!--// google fonts and font awesome stylesheet-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <!--// author stylesheet-->
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body class="d-flex flex-column h-100">
+
+<!-- // Header -->
+    <header class="container">
+        <h1 class="row justify-content-center">Find My Hike</h1>
+    </header>
+
+<!-- // Main section -->
+    <main role="main">          
+    <div class="container">
+        <form id="search-form">
+            <div class="form-group">
+                <label for="term">Search for a hike near...</label>
+                <input type="text" id="term">   
+                <button type="submit" class="btn-sm btn-primary" id="submit-button">Submit</button>    
+            </div>            
+        </form>
+    </div>
+    <div class="container" id="results-here">
+        <ul>
+            <!-- <li></li>
+            <li></li>
+            <li></li> -->
+        </ul>
+    </div>
+    <div class="container" id="hike-display">
+        <div class="row">
+            <div class="col">
+                <img src="" alt="image of hike" id="image-input"><h2 id="title-input"></h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col" id="rating">
+                <h2>User rating:</h2><span id="rating-input"></span>
+            </div>
+            <div class="col" id="difficulty">
+                <h2>Difficulty:</h2><span id="difficulty-input"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col" id="description">
+                <h2>Description:</h2><span id="description-input"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col" id="weather">
+                <h2>Weather:</h2><span id="weather-input"></span>
+            </div>
+            <div class="col" id="directions">
+                    <h2>Get directions:</h2><span id="directions-input"></span>
+            </div>
+        </div>
+    </div>
+    </main>
+<!-- // Scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="assets/javascript/game.js"></script>
+</body>
+</html>
