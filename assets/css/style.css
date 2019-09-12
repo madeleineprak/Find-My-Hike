@@ -1,0 +1,92 @@
+/* Color Palette 
+ taupe/gray: #80766f rgb(128,118,111)
+ beige: #b1976a rgb(177,151,106)
+ dark green: 373e2a rgb(55,62,42)
+ orange: a44c04 rgb(164,76,4)
+ bright green: 2c4c04 rgb(44,76,4)
+*/
+
+/* GLobal styles
+--------------------*/
+body{
+    background-image: url("../images/background.jpg"); /* Photo by Galen Crout on Unsplash */
+    background-size: cover;
+    color: #383838;        
+    font-size: 1em; 
+    font-family:'Bree Serif', serif;;
+ }
+
+ h2 {
+     font-size: 1em;
+     font-weight: 600;      
+ }
+
+ h1{
+     color: #a44c04;
+     font-weight: 400; 
+ }
+
+/* Headers styles
+--------------------*/
+header {
+    margin-left: 0px;
+    margin-right: 0px;
+    padding: 0;
+    width: 100%;    
+}
+
+ .jumbotron {
+     background-color: rgba(128,118,111, 0.5);     
+ }
+ 
+ i {
+     margin-right: 10px;
+     color: rgb(55,62,42)
+ }
+ .circle-icon {
+    background: rgba(255, 255, 255, 0.25);
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 50px;
+    vertical-align: middle;
+    padding: 10px;
+ }
+
+/* Main body styles
+--------------------*/
+
+#rating, #description, #difficulty, #directions, #weather {
+    background-color: rgba(255, 255, 255, 0.25);
+    margin: 3px;
+}
+
+#hike-display{
+    visibility: visible; 
+}
+
+#submit-button{
+    background-color: rgb(55,62,42);
+    border: none;
+}
+
+.circular-image {
+    display: inline-block;
+    position: relative;
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+img {
+    width: auto;
+    height: 100%;   
+}
+
+/* #title-input {
+   padding-top: 20%;
+   padding-bottom: 20%;
+} */
+
