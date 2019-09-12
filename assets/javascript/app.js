@@ -19,6 +19,43 @@ $.get(URLHP).done(response => {
 /* Mapquest Directions AJAX Request*/
 
 /* OpenWeather API AJAX Request*/
+var openWeaterAPI = {
+    APIKey: "2d017a4453be6f15af1c818bb7e28d02",
+    getRequest: function(){
+        var queryURL = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${this.APIKey}`;    
+        var forecastURL = `https://api.openweathermap.org/data/2.5/forecast/hourly?lat=${lat}&lon=${long}&appid=${this.APIKey}`;         
+        $.get(queryURL).done(response => {
+        console.log(response);
+        var weather = response.weather[0].description;
+        var icon = response.weather[0].icon;
+        var temp = response.main.temp;
+        var tempF = Math.round(convert(temp));
+        var wind = response.wind.speed;
+        var sunrise = response.sys.sunrise;
+        var sunset = response.sys.sunset;
+        function convert(K){
+            var F = (K - 273.15) * 1.80 + 32;
+            return F;
+        }
+        function convertTime(T){
+            var dt = new Date(T * 1000);
+            var hr = dt.getHours();
+            var m = "0" + dt.getMinutes();           
+            return `${hr}:${m.substr(-2)}`;   
+        }      
+        var sunsetConvert = convertTime(sunset);    
+        var sunriseConvert = convertTime(sunrise);  
+        console.log(icon);     
+        $("#weather-input").append(`<img src="../images/${icon}.png" alt="weather icon" width="42" height="42"><span>${weather}</span><div>Sunrise: ${sunriseConvert}</div><div>Sunset:${sunsetConvert}</div><div>Temp: ${tempF}&#8457</div>`)
+        });
+        $.get(forecastURL).done(response => {
+            console.log(response);            
+        })
+    }
+}
+openWeaterAPI.getRequest();
+
+
 
 /* Event Listeners*/
 //on submit....
