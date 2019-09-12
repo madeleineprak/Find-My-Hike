@@ -85,6 +85,10 @@ img {
     height: 100%;   
 }
 
+span, #title-input {
+    color: white;
+}
+
 /* #title-input {
    padding-top: 20%;
    padding-bottom: 20%;
