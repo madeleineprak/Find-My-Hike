@@ -17,7 +17,31 @@ $.get(URLHP).done(response => {
         console.log(`error is ${error}`);   
     });
 /* Mapquest Directions AJAX Request*/
+// APIkey = OlA3XD01BeVa2IeDq2kLC4Y4Cr3IDWMw;
+window.onload = function() {
+    L.mapquest.key = 'OlA3XD01BeVa2IeDq2kLC4Y4Cr3IDWMw';
 
+    var map = L.mapquest.map('map', {
+      center: [47.6050, -122.3344],
+      layers: L.mapquest.tileLayer('map'),
+      zoom: 13,
+      zoomControl: false
+    });
+
+    L.control.zoom({
+      position: 'topright'
+    }).addTo(map);
+
+    L.mapquest.directionsControl({
+      routeSummary: {
+        enabled: false
+      },
+      narrativeControl: {
+        enabled: true,
+        compactResults: false
+      }
+    }).addTo(map);
+  }
 /* OpenWeather API AJAX Request*/
 
 /* Event Listeners*/
