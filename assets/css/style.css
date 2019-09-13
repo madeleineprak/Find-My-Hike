@@ -57,9 +57,10 @@ header {
 /* Main body styles
 --------------------*/
 
-#rating, #description, #difficulty, #directions, #weather {
+.wrapper {
     background-color: rgba(255, 255, 255, 0.25);
     margin: 3px;
+    width: 100%;
 }
 
 #hike-display{
@@ -80,17 +81,22 @@ header {
     border-radius: 50%;
 }
 
-img {
+#image-input {
     width: auto;
     height: 100%;   
 }
 
-span, #title-input {
+#title-input {
     color: white;
 }
 
-/* #title-input {
-   padding-top: 20%;
-   padding-bottom: 20%;
-} */
+.hiking-button {
+    font-size: 0.75em;
+    font-weight: 100;
+}
+
+#results-here {
+    margin: 0px;
+    padding: 0px;
+}
 
