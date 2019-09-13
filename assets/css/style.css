@@ -11,7 +11,7 @@
 body{
     background-image: url("../images/background.jpg"); /* Photo by Galen Crout on Unsplash */
     background-size: cover;
-    color: #383838;        
+    color: rgb(15, 14, 14);        
     font-size: 1em; 
     font-family:'Bree Serif', serif;;
  }
@@ -56,14 +56,24 @@ header {
 
 /* Main body styles
 --------------------*/
+#term {
+    width: 50%;
+}
 
-#rating, #description, #difficulty, #directions, #weather {
+#states{
+    width: 20%;
+    display: inline-block;
+    background-color: lightgrey;   
+}
+
+.wrapper {
     background-color: rgba(255, 255, 255, 0.25);
     margin: 3px;
+    width: 100%;
 }
 
 #hike-display{
-    visibility: visible; 
+    visibility: hidden; 
 }
 
 #submit-button{
@@ -80,17 +90,22 @@ header {
     border-radius: 50%;
 }
 
-img {
+#image-input {
     width: auto;
     height: 100%;   
 }
 
-span, #title-input {
+#title-input {
     color: white;
 }
 
-/* #title-input {
-   padding-top: 20%;
-   padding-bottom: 20%;
-} */
+.hiking-button {
+    font-size: 0.75em;
+    font-weight: 100;
+}
+
+#results-here {
+    margin: 0px;
+    padding: 0px;
+}
 
