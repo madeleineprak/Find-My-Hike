@@ -11,7 +11,7 @@
 body{
     background-image: url("../images/background.jpg"); /* Photo by Galen Crout on Unsplash */
     background-size: cover;
-    color: #383838;        
+    color: rgb(15, 14, 14);        
     font-size: 1em; 
     font-family:'Bree Serif', serif;;
  }
@@ -56,6 +56,15 @@ header {
 
 /* Main body styles
 --------------------*/
+#term {
+    width: 50%;
+}
+
+#states{
+    width: 20%;
+    display: inline-block;
+    background-color: lightgrey;   
+}
 
 .wrapper {
     background-color: rgba(255, 255, 255, 0.25);
@@ -64,7 +73,7 @@ header {
 }
 
 #hike-display{
-    visibility: visible; 
+    visibility: hidden; 
 }
 
 #submit-button{

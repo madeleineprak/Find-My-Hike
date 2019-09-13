@@ -2,9 +2,9 @@ $(document).ready(function(){
 /* Global Variables */
 var lat, long, searchInput;
  /* Lat and Long AJAX Request from MapQuest API */
- function getLatLong(searchInput){
+ function getLatLong(searchInput, state){
     return $.ajax({
-        url: `https://www.mapquestapi.com/geocoding/v1/address?key=ttL7KMim9EoyXL2nRjDSwVtMA5XImeGB&inFormat=kvp&outFormat=json&location=${searchInput}&thumbMaps=false`,
+        url: `https://www.mapquestapi.com/geocoding/v1/address?key=ttL7KMim9EoyXL2nRjDSwVtMA5XImeGB&inFormat=kvp&outFormat=json&location=${searchInput},${state}&thumbMaps=false`,
         success: function(response) {   
         lat = response.results[0].locations[0].latLng.lat;
         long = response.results[0].locations[0].latLng.lng;             
@@ -21,20 +21,15 @@ function getHikingProject(lat, long){
                 this.hikesArray = response.trails;
                 var hike = response.trails[i];
                 var hikeButton = $("<button>");
-                hikeButton.attr("data-name", hike.name);
-                hikeButton.attr("data-id", hike.id);              
+                hikeButton.attr("data-name", hike.name).attr("data-id", hike.id).attr("data-lat", hike.latitude).attr("data-long", hike.longitude);              
                 hikeButton.addClass("hiking-button");
-                hikeButton.text(hike.name);
-                // var hikeImage = $("<img>");
-                // var hikeImageUrl = hike.imgSqSmall;
-                // hikeImage.attr("src", hikeImageUrl);
+                hikeButton.text(hike.name);           
                 $("#results-here").append(hikeButton);
             }
         },
         error: error => console.log(error)
     })
 };
-
 function getHikeDetails(ID){
     return $.ajax({
         url: `https://cors-anywhere.herokuapp.com/https://www.hikingproject.com/data/get-trails-by-id?ids=${ID}&key=200585860-f4494d9d7cf44d6a85f6bfd15f2a7061`,
@@ -48,18 +43,14 @@ function getHikeDetails(ID){
             } else if(trails.difficulty === "blue"){
                 $("#difficulty-input").text("intermediate");
             } else if(trails.difficulty === "black"){
-                $("#difficulty-input").text(difficult);
+                $("#difficulty-input").text("difficult");
+            } else if(trails.difficulty === "greenBlue"){
+                $("#difficulty-input").text("intermediate/difficult");
             } else {
                 $("#difficulty-input").text("unknown");
             };
-            $("#description-input").text(trails.summary);
-
-            
-
-        //         $("#image-input").attr("src", this.pickedHike.photo);
-                // var hikeImage = $("<img>");
-                // var hikeImageUrl = hike.imgSqSmall;
-                // hikeImage.attr("src", hikeImageUrl);  
+            $("#description-input").text(trails.summary).append(`<a href=${trails.url}> more info </a>`);
+            $("#image-input").attr("src", trails.imgSqSmall);   //need to add if no image, default     
     },
         error: error => console.log(error)
     })
@@ -93,21 +84,19 @@ function getHikeDetails(ID){
 //     },   
 // }
 
-/* Hiking Project API and AJAX Request */
+/* Mapquest Static Map API and AJAX Request */
+//I think we need to get this to already input the destination
 function getDirections(lat, long) {
     L.mapquest.key = 'OlA3XD01BeVa2IeDq2kLC4Y4Cr3IDWMw';
-
     var map = L.mapquest.map('map', {
       center: [lat, long],
       layers: L.mapquest.tileLayer('map'),
       zoom: 13,
       zoomControl: false
     });
-
     L.control.zoom({
       position: 'topright'
     }).addTo(map);
-
     L.mapquest.directionsControl({
       routeSummary: {
         enabled: false
@@ -146,6 +135,18 @@ function getWeather(lat, long){
         error: error => console.log(error)
     })
 }
+/* OpenWeather API FORECAST AJAX Request*/
+function getWeatherForecast(lat, long){
+    return $.ajax({
+        url: `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&appid=2d017a4453be6f15af1c818bb7e28d02`,
+        success: function(response){           
+            console.log(response)  
+            //need to figure out where the forecast is in this object. 
+            // $("#weather-input").append(`<img src="assets/images/${icon}.png" alt="weather icon" width="60" height="60"><span>${weather}</span><div>Sunrise: ${sunriseConvert}</div><div>Sunset:${sunsetConvert}</div><div>Temp: ${tempF}&#8457</div>`);        
+        },
+        error: error => console.log(error)
+    })
+}
 /* Empty Results */
 function emptyResults(){    
     $("#weather-input").empty();
@@ -160,24 +161,29 @@ function emptyResults(){
 $("#submit-button").on("click", function(){
     event.preventDefault();
     $("#results-here").empty();
-    emptyResults();
-    searchInput = $("#term").val();           
-    $.when(getLatLong(searchInput)).then(function(){
+    emptyResults();    
+    searchInput = $("#term").val();  
+    var state = $("#states option:selected").text();        
+    console.log(state); 
+    $.when(getLatLong(searchInput, state)).then(function(){
         console.log(lat);
         console.log(long);    
-        getHikingProject(lat, long);        
+        getHikingProject(lat, long); 
+        $("form").trigger("reset");        
     });   
 });
 
 $(document).on("click", ".hiking-button", function(event) {  
-    emptyResults();  
+    $("#hike-display").css("visibility", "visible");
+    emptyResults();      
     var hikeID = $(this).attr("data-id");  
+    var hikeLat = $(this).attr("data-lat");
+    var hikeLong = $(this).attr("data-long");
     console.log(hikeID);    
-    getHikeDetails(hikeID);
-    // var pickedHike = $(this).text();   
-    // hikingProject.clickHikeButton(pickedHike);
-    getWeather(lat, long);
-    getDirections(lat, long);
+    getHikeDetails(hikeID);  
+    getWeather(hikeLat, hikeLong);
+    getDirections(hikeLat, hikeLong);
+    getWeatherForecast(hikeLat, hikeLong);
 });
 
 });
