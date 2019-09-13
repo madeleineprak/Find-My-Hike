@@ -50,68 +50,103 @@ function getHikeDetails(ID){
                 $("#difficulty-input").text("unknown");
             };
             $("#description-input").text(trails.summary).append(`<a href=${trails.url}> more info </a>`);
-            $("#image-input").attr("src", trails.imgSqSmall);   //need to add if no image, default     
+            $("#image-input").attr("src", trails.imgSqSmall);   //need to add default if no image  
     },
         error: error => console.log(error)
     })
 };
 
-// var hikingProject = {   
-//     hikesArray: [],
-//     pickedHike: {
-//         name: "",
-//         photo: "",
-//         rating: "",
-//         description: "",
-//         difficulty: "",
-//     },
-//     clickHikeButton: function(hike) {
-//              // for (i=0; i<this.hikesArray.length; i++) {
-        //     if (hike === this.hikesArray[i].name) {
-        //         this.pickedHike.name = this.hikesArray[i].name;
-        //         this.pickedHike.photo = this.hikesArray[i].imgSqSmall;
-        //         this.pickedHike.rating = this.hikesArray[i].stars;
-        //         this.pickedHike.description = this.hikesArray[i].summary;
-        //         this.pickedHike.difficulty = this.hikesArray[i].difficulty;
-        //         console.log("success");
-        //         $("#title-input").text(this.pickedHike.name);
-        //         $("#rating-input").text(this.pickedHike.rating);
-        //         $("#difficulty-input").text(this.pickedHike.difficulty);
-        //         $("#description-input").text(this.pickedHike.description);
-        //         $("#image-input").attr("src", this.pickedHike.photo);
-        //     }
-        // }
-//     },   
-// }
-
-/* Mapquest Static Map API and AJAX Request */
-//I think we need to get this to already input the destination
+/*Map API and AJAX Request */
+//Bug present that doesnt let user type in starting point and map. I think ajax call needed for that?
 function getDirections(lat, long) {
     L.mapquest.key = 'OlA3XD01BeVa2IeDq2kLC4Y4Cr3IDWMw';
     var map = L.mapquest.map('map', {
       center: [lat, long],
-      layers: L.mapquest.tileLayer('map'),
+      layers: L.mapquest.tileLayer('map'),      
       zoom: 13,
       zoomControl: false
-    });
+    }); 
     L.control.zoom({
       position: 'topright'
     }).addTo(map);
-    L.mapquest.directionsControl({
-      routeSummary: {
-        enabled: false
-      },
-      narrativeControl: {
-        enabled: true,
-        compactResults: false
-      }
-    }).addTo(map);
-  }
+    L.mapquest.directionsControl({        
+        directions: {
+          options: {
+            timeOverage: 25,
+            doReverseGeocode: false,
+          }
+        },
+        directionsLayer: {
+          startMarker: {
+            draggable: true,
+            icon: 'marker-start',
+            iconOptions: {},
+          },
+          endMarker: {
+            draggable: true,
+            icon: 'marker-end',
+            iconOptions: {},
+          },
+          routeRibbon: {
+            showTraffic: true
+          },
+          alternateRouteRibbon: {
+            showTraffic: true
+          },
+          paddingTopLeft: [450, 20],
+          paddingBottomRight: [20, 20],
+        },
+        startInput: {
+          compactResults: true,
+          disabled: false,
+          location: {},
+          placeholderText: 'Starting point or click on the map...',
+          geolocation: {
+            enabled: true
+          }
+        },
+        endInput: {
+          compactResults: true,
+          disabled: false,
+          location: {
+             latLng: {
+                 lat: lat,
+                 lng: long
+             } 
+            },
+          placeholderText: 'Destination',
+          geolocation: {
+            enabled: false
+          }
+        },
+        addDestinationButton: {
+          enabled: true,
+          maxLocations: 10,
+        },
+        routeTypeButtons: {
+          enabled: true,
+        },
+        reverseButton: {
+          enabled: true,
+        },
+        optionsButton: {
+          enabled: true,
+        },
+        routeSummary: {
+          enabled: false,
+        },
+        narrativeControl: {
+          enabled: true,
+          compactResults: false,
+          interactive: true,
+        },
+      }).addTo(map);
+}
 /* OpenWeather API AJAX Request*/
 function getWeather(lat, long){
     return $.ajax({
         url: `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=2d017a4453be6f15af1c818bb7e28d02`,
-        success: function(response){           
+        success: response => {           
             var weather = response.weather[0].description;
             var icon = response.weather[0].icon;
             var temp = response.main.temp;
@@ -139,10 +174,28 @@ function getWeather(lat, long){
 function getWeatherForecast(lat, long){
     return $.ajax({
         url: `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&appid=2d017a4453be6f15af1c818bb7e28d02`,
-        success: function(response){           
+        success: response => {           
             console.log(response)  
             //need to figure out where the forecast is in this object. 
             // $("#weather-input").append(`<img src="assets/images/${icon}.png" alt="weather icon" width="60" height="60"><span>${weather}</span><div>Sunrise: ${sunriseConvert}</div><div>Sunset:${sunsetConvert}</div><div>Temp: ${tempF}&#8457</div>`);        
+        },
+        error: error => console.log(error)
+    })
+}
+/* YELP API */
+function getYelp(lat, long) {
+    return $.ajax({
+        url: `https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?categories=restaurants&latitude=${lat}&longitude=${long}&radius=5000&limit=10`,
+        headers: {
+            "Authorization": "Bearer U4zPieXnsduH4Rg3NZDZvSSMzQmAwTZqI8wc1JEwROAUknwL15_b6FiWNlkhZCMhNTBJNTm2ZzctwONE9rEob9e6DuAoCv2zUH2fO29eDglEb6F1UGIC_ILc--l7XXYx"
+        },
+        success: response => {
+            console.log(response);
+            var business = response.businesses;
+            for(var i = 0; i < response.businesses.length; i++){
+                $("#yelp-input").append(`<a href=${business[i].url}>${business[i].name}</a><span> , ${business[i].location.city} </span>`)
+            }
+            
         },
         error: error => console.log(error)
     })
@@ -155,6 +208,7 @@ function emptyResults(){
     $("#difficulty-input").empty();
     $("#description-input").empty();
     $("#image-input").empty();
+    $("#yelp-input").empty();
 }
 /* Event Listeners*/
 //on submit....
@@ -184,6 +238,7 @@ $(document).on("click", ".hiking-button", function(event) {
     getWeather(hikeLat, hikeLong);
     getDirections(hikeLat, hikeLong);
     getWeatherForecast(hikeLat, hikeLong);
+    getYelp(hikeLat, hikeLong);
 });
 
 });
