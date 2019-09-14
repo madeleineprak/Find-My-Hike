@@ -17,7 +17,8 @@
     <link type="text/css" rel="stylesheet" href="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.css"/>
 </head>
 
-<body>
+<body class="wrapper">
+<div class="background-container parallax">
 
 <!-- // Header -->
     <header class="jumbotron jumbotron-fluid">        
@@ -29,8 +30,9 @@
 <!-- // Main section -->
     <main role="main" class="container">          
     <div class="container">
+        <div class="row">
         <form id="search-form">  
-            <input type="text" id="term" placeholder="Search for a hike near...">   
+            <input class="col" type="text" id="term" placeholder="Search for a hike near...">   
             <select class="form-control" id="states">
                     <option value="1" selected>WA</option>
                     <option value="2">AL</option>
@@ -83,8 +85,34 @@
                     <option value="49">WI</option>
                     <option value="50">WY</option>
             </select>
-            <button type="submit" class="btn-sm btn-primary" id="submit-button">Submit</button>                        
+            <button type="submit" class="btn-sm btn-primary col-2" id="submit-button">Submit</button>                        
         </form>
+        <div class="navbar col-4">
+                    <button type="button" id="sidebarCollapse" class="btn">
+                        <i class="fas fa-align-left"></i>
+                        <span>Packing List</span>
+                    </button>
+        </div>
+        <nav id="sidebar" >            
+            <div class="sidebar-header">
+                <h3>Packing List</h3>
+            </div>           
+                <ul class="list-unstyled">
+                    <ul>
+                    <li>Hiking backpack</li>
+                    <li>Weather-appropriate clothing (think moisture-wicking and layers)</li>
+                    <li>Hiking boots or shoes</li>
+                    <li>Shoes for after the hike (store in car)</li>
+                    <li>Plenty of food</li>
+                    <li>Plenty of water</li>
+                    <li>Navigation tools such as a map and compass</li>
+                    <li>First-aid kit</li>
+                    <li>Knife or multi-tool</li>
+                    <li>Sun protection, weather-dependent</li>
+                </ul>
+           
+        </nav>
+    </div>
     </div>
     <div class="container">
         <ul id="results-here">        
@@ -102,31 +130,31 @@
             </div>
         </div>
         <div class="row">
-            <div class="col wrapper">
+            <div class="col layer">
                 <div id="rating">
                     <h2>User rating:</h2><span id="rating-input"></span>
                 </div>
             </div>
-            <div class="col wrapper">
+            <div class="col layer">
                 <div id="difficulty">
                     <h2>Difficulty:</h2><span id="difficulty-input"></span>
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="col wrapper">
+            <div class="col layer">
                 <div id="description">
                     <h2>Description:</h2><span id="description-input"></span>
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="col wrapper">
+            <div class="col layer">
                 <div id="weather">
                     <h2>Weather:</h2><span id="weather-input"></span>
                 </div>
             </div>
-            <div class=" col wrapper">
+            <div class=" col layer">
                 <div id="directions">
                         <h2>Get directions:</h2><span id="directions-input"></span>
                         <div id="map" style="width: 100%; height: 250px;"></div>
@@ -134,7 +162,7 @@
             </div>
         </div>
         <div class="row">
-            <div class=" col wrapper">
+            <div class="col layer">
                 <div id="restaurants">
                     <h2>Nearby restaurants:</h2><span id="yelp-input"></span>
                 </div>
@@ -142,6 +170,22 @@
         </div>    
     </div>
     </main>
+    <footer class="footer">
+        <div class="container footer-text">
+            <span>
+                <div class="row">
+                    <div class="col-9">
+                        <h3>Authors</h3>
+                        <div>Turan Ketene &#8226 Stephanie Lake &#8226 Madeleine Prak</div>   
+                    </div>
+                    <div class="col-3">
+                        <span class="bottom-align-tex text-right">Copyright &copy</span>
+                    </div>
+                </div>
+            </span>
+        </div>
+    </footer>
+</div>
 <!-- // Scripts -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
