@@ -4,10 +4,14 @@ var lat, long, searchInput;
  /* Lat and Long AJAX Request from MapQuest API */
  function getLatLong(searchInput, state){
     return $.ajax({
-        url: `https://www.mapquestapi.com/geocoding/v1/address?key=ttL7KMim9EoyXL2nRjDSwVtMA5XImeGB&inFormat=kvp&outFormat=json&location=${searchInput},${state}&thumbMaps=false`,
+        // url: `https://www.mapquestapi.com/geocoding/v1/address?key=ttL7KMim9EoyXL2nRjDSwVtMA5XImeGB&inFormat=kvp&outFormat=json&location=${searchInput}, ${state}&thumbMaps=false`,
+        url: `https://maps.googleapis.com/maps/api/geocode/json?address=${searchInput},+${state}&key=AIzaSyDOY9Oyx6yzfqzGEky4rj7bUi31kovFk5k`,
         success: function(response) {   
-        lat = response.results[0].locations[0].latLng.lat;
-        long = response.results[0].locations[0].latLng.lng;             
+        // lat = response.results[0].locations[0].latLng.lat;
+        // long = response.results[0].locations[0].latLng.lng;        
+        var results = response.results[0].geometry.location;
+        lat = results.lat;
+        long = results.lng;
         },
         error: error => console.log(error)  
     })
@@ -34,8 +38,7 @@ function getHikeDetails(ID){
     return $.ajax({
         url: `https://cors-anywhere.herokuapp.com/https://www.hikingproject.com/data/get-trails-by-id?ids=${ID}&key=200585860-f4494d9d7cf44d6a85f6bfd15f2a7061`,
         success: response => {
-            var trails = response.trails[0];
-            console.log(trails);
+            var trails = response.trails[0];            
             $("#title-input").text(trails.name);
             $("#rating-input").text(`${trails.stars}/5`);
             if(trails.difficulty === "green"){
@@ -58,9 +61,10 @@ function getHikeDetails(ID){
 
 /*Map API and AJAX Request */
 //Bug present that doesnt let user type in starting point and map. I think ajax call needed for that?
-function getDirections(lat, long) {
-    L.mapquest.key = 'OlA3XD01BeVa2IeDq2kLC4Y4Cr3IDWMw';
-    var map = L.mapquest.map('map', {
+function getDirections(lat, long) {   
+    //need to make this so that if no map exists, do the below, else skip.
+      L.mapquest.key = 'OlA3XD01BeVa2IeDq2kLC4Y4Cr3IDWMw';
+      var map = L.mapquest.map('map', {
       center: [lat, long],
       layers: L.mapquest.tileLayer('map'),      
       zoom: 13,
@@ -146,7 +150,8 @@ function getDirections(lat, long) {
 function getWeather(lat, long){
     return $.ajax({
         url: `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=2d017a4453be6f15af1c818bb7e28d02`,
-        success: response => {           
+        success: response => {     
+            console.log("weather working");    
             var weather = response.weather[0].description;
             var icon = response.weather[0].icon;
             var temp = response.main.temp;
@@ -174,10 +179,10 @@ function getWeather(lat, long){
 function getWeatherForecast(lat, long){
     return $.ajax({
         url: `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&appid=2d017a4453be6f15af1c818bb7e28d02`,
-        success: response => {           
-            console.log(response)  
-            //need to figure out where the forecast is in this object. 
-            // $("#weather-input").append(`<img src="assets/images/${icon}.png" alt="weather icon" width="60" height="60"><span>${weather}</span><div>Sunrise: ${sunriseConvert}</div><div>Sunset:${sunsetConvert}</div><div>Temp: ${tempF}&#8457</div>`);        
+        success: response => {    
+            console.log("forecast working");      
+            var forecast = response.list[0].weather[0].description;        
+            $("#weather-input").append(`<span>Today's forecast: ${forecast}</span><div>`);        
         },
         error: error => console.log(error)
     })
@@ -185,17 +190,16 @@ function getWeatherForecast(lat, long){
 /* YELP API */
 function getYelp(lat, long) {
     return $.ajax({
-        url: `https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?categories=restaurants&latitude=${lat}&longitude=${long}&radius=5000&limit=10`,
+        url: `https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?categories=restaurants&latitude=${lat}&longitude=${long}&radius=15000&limit=10`,
         headers: {
             "Authorization": "Bearer U4zPieXnsduH4Rg3NZDZvSSMzQmAwTZqI8wc1JEwROAUknwL15_b6FiWNlkhZCMhNTBJNTm2ZzctwONE9rEob9e6DuAoCv2zUH2fO29eDglEb6F1UGIC_ILc--l7XXYx"
         },
-        success: response => {
-            console.log(response);
+        success: response => {            
             var business = response.businesses;
+            //if none, return "no restaurants within 10 miles"
             for(var i = 0; i < response.businesses.length; i++){
                 $("#yelp-input").append(`<a href=${business[i].url}>${business[i].name}</a><span> , ${business[i].location.city} </span>`)
             }
-            
         },
         error: error => console.log(error)
     })
@@ -217,29 +221,32 @@ $("#submit-button").on("click", function(){
     $("#results-here").empty();
     emptyResults();    
     searchInput = $("#term").val();  
-    var state = $("#states option:selected").text();        
-    console.log(state); 
-    $.when(getLatLong(searchInput, state)).then(function(){
-        console.log(lat);
-        console.log(long);    
+    var state = $("#states option:selected").text();    
+    $.when(getLatLong(searchInput, state)).then(function(){        
         getHikingProject(lat, long); 
         $("form").trigger("reset");        
     });   
 });
-
 $(document).on("click", ".hiking-button", function(event) {  
     $("#hike-display").css("visibility", "visible");
     emptyResults();      
+    // map.remove();
     var hikeID = $(this).attr("data-id");  
     var hikeLat = $(this).attr("data-lat");
-    var hikeLong = $(this).attr("data-long");
-    console.log(hikeID);    
-    getHikeDetails(hikeID);  
-    getWeather(hikeLat, hikeLong);
-    getDirections(hikeLat, hikeLong);
-    getWeatherForecast(hikeLat, hikeLong);
+    var hikeLong = $(this).attr("data-long"); 
     getYelp(hikeLat, hikeLong);
+    getWeatherForecast(hikeLat, hikeLong);
+    getWeather(hikeLat, hikeLong);
+    getHikeDetails(hikeID);  
+    getDirections(hikeLat, hikeLong);       
 });
-
+$(".openbtn").on("click", function(){
+  $("#mySidebar").css("width", "250px");
+  $("#main").css("margin-left", "250px");
+})
+$(".closebtn").on("click", function(){
+  $("#mySidebar").css("width", "0");
+  $("#main").css("margin-left", "0");
+})
 });
 
