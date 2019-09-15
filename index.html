@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
     <!--// google fonts and font awesome stylesheet-->
-    <link href="https://fonts.googleapis.com/css?family=Bree+Serif&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Bree+Serif|Shadows+Into+Light&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     <!--// author stylesheet-->
     <link rel="stylesheet" href="assets/css/style.css">
@@ -28,92 +28,112 @@
     </header>
 
 <!-- // Main section -->
-    <main role="main" class="container">          
+    <main role="main">          
     <div class="container">
         <div class="row">
-        <form id="search-form">  
-            <input class="col" type="text" id="term" placeholder="Search for a hike near...">   
-            <select class="form-control" id="states">
-                    <option value="1" selected>WA</option>
-                    <option value="2">AL</option>
-                    <option value="3">AK</option>
-                    <option value="4">AZ</option>
-                    <option value="5">AR</option>
-                    <option value="6">CA</option>
-                    <option value="7">CO</option>
-                    <option value="8">CT</option>
-                    <option value="9">DE</option>
-                    <option value="10">FL</option>
-                    <option value="11">GA</option>
-                    <option value="12">HI</option>
-                    <option value="13">ID</option>
-                    <option value="14">IL</option>
-                    <option value="15">IN</option>
-                    <option value="16">IA</option>
-                    <option value="17">KS</option>
-                    <option value="18">KY</option>
-                    <option value="19">LA</option>
-                    <option value="20">ME</option>
-                    <option value="21">MD</option>
-                    <option value="22">MA</option>
-                    <option value="23">MI</option>
-                    <option value="24">MN</option>
-                    <option value="25">MS</option>
-                    <option value="26">MO</option>
-                    <option value="27">MT</option>
-                    <option value="28">NE</option>
-                    <option value="29">NV</option>
-                    <option value="30">NH</option>
-                    <option value="31">NJ</option>
-                    <option value="32">NM</option>
-                    <option value="33">NY</option>
-                    <option value="34">NC</option>
-                    <option value="35">ND</option>
-                    <option value="36">OH</option>
-                    <option value="37">OK</option>
-                    <option value="38">OR</option>
-                    <option value="39">PA</option>
-                    <option value="40">RI</option>
-                    <option value="41">SC</option>
-                    <option value="42">SD</option>
-                    <option value="43">TN</option>
-                    <option value="44">TX</option>
-                    <option value="45">UT</option>
-                    <option value="46">VT</option>
-                    <option value="47">VA</option>
-                    <option value="48">WV</option>
-                    <option value="49">WI</option>
-                    <option value="50">WY</option>
-            </select>
-            <button type="submit" class="btn-sm btn-primary col-2" id="submit-button">Submit</button>                        
-        </form>
-        <div class="navbar col-4">
-                    <button type="button" id="sidebarCollapse" class="btn">
-                        <i class="fas fa-align-left"></i>
-                        <span>Packing List</span>
-                    </button>
+            <form id="search-form" class="col">  
+                <input type="text" id="term" placeholder="Search for a hike near...">   
+                <select class="form-control" id="states">
+                        <option value="1" selected>WA</option>
+                        <option value="2">AL</option>
+                        <option value="3">AK</option>
+                        <option value="4">AZ</option>
+                        <option value="5">AR</option>
+                        <option value="6">CA</option>
+                        <option value="7">CO</option>
+                        <option value="8">CT</option>
+                        <option value="9">DE</option>
+                        <option value="10">FL</option>
+                        <option value="11">GA</option>
+                        <option value="12">HI</option>
+                        <option value="13">ID</option>
+                        <option value="14">IL</option>
+                        <option value="15">IN</option>
+                        <option value="16">IA</option>
+                        <option value="17">KS</option>
+                        <option value="18">KY</option>
+                        <option value="19">LA</option>
+                        <option value="20">ME</option>
+                        <option value="21">MD</option>
+                        <option value="22">MA</option>
+                        <option value="23">MI</option>
+                        <option value="24">MN</option>
+                        <option value="25">MS</option>
+                        <option value="26">MO</option>
+                        <option value="27">MT</option>
+                        <option value="28">NE</option>
+                        <option value="29">NV</option>
+                        <option value="30">NH</option>
+                        <option value="31">NJ</option>
+                        <option value="32">NM</option>
+                        <option value="33">NY</option>
+                        <option value="34">NC</option>
+                        <option value="35">ND</option>
+                        <option value="36">OH</option>
+                        <option value="37">OK</option>
+                        <option value="38">OR</option>
+                        <option value="39">PA</option>
+                        <option value="40">RI</option>
+                        <option value="41">SC</option>
+                        <option value="42">SD</option>
+                        <option value="43">TN</option>
+                        <option value="44">TX</option>
+                        <option value="45">UT</option>
+                        <option value="46">VT</option>
+                        <option value="47">VA</option>
+                        <option value="48">WV</option>
+                        <option value="49">WI</option>
+                        <option value="50">WY</option>
+                </select>
+                <button type="submit" class="btn-sm btn-primary" id="submit-button">Submit</button>                        
+            </form>      
+            <div class="col-2" id="main">
+                <button class="openbtn btn">&#10004; Packing List</button>                
+            </div>
         </div>
-        <nav id="sidebar" >            
-            <div class="sidebar-header">
-                <h3>Packing List</h3>
+        <div id="mySidebar" class="sidebar">
+            <a href="javascript:void(0)" class="closebtn">&times;</a>
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="defaultUnchecked">
+                <label class="custom-control-label" for="defaultUnchecked">Hiking backpack</label>
+            </div>
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="defaultUnchecked">
+                <label class="custom-control-label" for="defaultUnchecked">Weather-appropriate clothing (think moisture-wicking and layers)</label>
+            </div>
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="defaultUnchecked">
+                <label class="custom-control-label" for="defaultUnchecked">Hiking boots or shoes</label>
+            </div>
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="defaultUnchecked">
+                <label class="custom-control-label" for="defaultUnchecked">Shoes for after the hike (store in car)</label>
+            </div>
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="defaultUnchecked">
+                <label class="custom-control-label" for="defaultUnchecked">Plenty of food</label>
+            </div>
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="defaultUnchecked">
+                <label class="custom-control-label" for="defaultUnchecked">Plenty of water</label>
+            </div>
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="defaultUnchecked">
+                <label class="custom-control-label" for="defaultUnchecked">Navigation tools such as a map and compass</label>
+            </div>
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="defaultUnchecked">
+                <label class="custom-control-label" for="defaultUnchecked">First-aid kit</label>
+            </div>
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="defaultUnchecked">
+                <label class="custom-control-label" for="defaultUnchecked">Knife or multi-tool/label>
+            </div>
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="defaultUnchecked">
+                <label class="custom-control-label" for="defaultUnchecked">Sun protection, weather-dependent</label>
             </div>           
-                <ul class="list-unstyled">
-                    <ul>
-                    <li>Hiking backpack</li>
-                    <li>Weather-appropriate clothing (think moisture-wicking and layers)</li>
-                    <li>Hiking boots or shoes</li>
-                    <li>Shoes for after the hike (store in car)</li>
-                    <li>Plenty of food</li>
-                    <li>Plenty of water</li>
-                    <li>Navigation tools such as a map and compass</li>
-                    <li>First-aid kit</li>
-                    <li>Knife or multi-tool</li>
-                    <li>Sun protection, weather-dependent</li>
-                </ul>
-           
-        </nav>
-    </div>
-    </div>
+        </div>
     <div class="container">
         <ul id="results-here">        
         </ul>
@@ -125,7 +145,7 @@
                     <img src="assets/images/background.jpg" alt="image of hike" id="image-input">
                 </div>                
             </div>
-            <div class="col-10 d-flex align-items-center justify-content-center">
+            <div class="col-10 d-flex align-items-center">
                 <h2 id="title-input">Sample Hike Title</h2>
             </div>
         </div>

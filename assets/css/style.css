@@ -2,7 +2,7 @@
  taupe/gray: #80766f rgb(128,118,111)
  beige: #b1976a rgb(177,151,106)
  dark green: 373e2a rgb(55,62,42)
- orange: a44c04 rgb(164,76,4)
+ orange: rgb(164,76,4)
  bright green: 2c4c04 rgb(44,76,4)
 */
 
@@ -28,8 +28,15 @@ h2 {
 }
 
 h1{
-     color: #a44c04;
-     font-weight: 400;  
+     color: rgb(55,62,42);
+     font-weight: 600;
+     font-size: 5em;  
+     font-family: 'Shadows Into Light', cursive;
+}
+
+a {
+    color: rgb(55,62,42);
+    font-weight: 500;
 }
 
 .parallax {   
@@ -43,62 +50,61 @@ h1{
 
 /* Sidebar styles
 --------------------*/
-#sidebar {
-    min-width: 250px;
-    max-width: 250px;
-    min-height: 50vh;
-    position: absolute;
-    right: -10%;
-    background: rgb(164,76,4, 0.5);
-    color: #fff;
-    transition: all 0.2s;
+.sidebar {
+height: 100%;
+width: 0;
+position: fixed;
+z-index: 1;
+top: 0;
+right: 0;
+background-color: rgba(164,76,4, 0.5);
+overflow-x: hidden;
+transition: 0.5s;
+padding-top: 60px;
+}
+  
+.sidebar a {
+padding: 8px 8px 8px 32px;
+text-decoration: none;
+font-size: 25px;
+color: rgb(15, 14, 14);
+display: block;
+transition: 0.3s;
 }
 
-#sidebar.active {
-    margin-right: -250px;
+.sidebar a:hover {
+color: #f1f1f1;
+}
+  
+.sidebar .closebtn {
+position: absolute;
+top: 0;
+right: 80%;
+font-size: 3em;
+margin-left: 50px;
 }
 
-#sidebar .sidebar-header {
-    padding: 20px;
-    background: rgb(164,76,4)
+.openbtn {
+cursor: pointer;
+background-color: rgb(164,76,4);
+color: white;
+padding: 5px;
+border: none;
+height: 100%;
+}
+  
+.openbtn:hover {
+background-color: #444;
 }
 
-#sidebar ul.components {
-    padding: 20px 0;
-    border-bottom: 1px solid rgb(164,76,4)
+#main {
+transition: margin-left .5s;
 }
 
-#sidebar ul p {
-    color: #fff;
-    padding: 10px;
+.custom-checkbox{
+    margin-left: 10px;
 }
 
-#sidebar ul li a:hover {
-    color: rgb(164,76,4);
-    background: #fff;
-}
-
-#sidebar ul li.active > a, a[aria-expanded="true"] {
-    color: #fff;
-    background: rgb(164,76,4);
-}
-
-div[data-toggle="collapse"] {
-    position: relative;
-}
-
-.list-unstyled {
-    visibility: hidden;
-}
-
-@media (max-width: 768px) {
-    #sidebar {
-        margin-left: -250px;
-    }
-    #sidebar.active {
-        margin-left: 0;
-    }
-}
 /* Headers styles
 --------------------*/
 header {
@@ -147,7 +153,7 @@ padding: 10px;
 }
 
 .layer {
-    background-color: rgba(255, 255, 255, 0.25);
+    background-color: rgba(255, 255, 255, 0.5);
     margin: 3px;
     width: 100%;
 }
@@ -159,6 +165,7 @@ padding: 10px;
 #submit-button{
     background-color: rgb(55,62,42);
     border: none;
+    height: 100%;
 }
 
 .circular-image {
@@ -172,11 +179,13 @@ padding: 10px;
 
 #image-input {
     width: auto;
-    height: 100%;   
+    height: 100%;     
 }
 
 #title-input {
-    color: white;
+    color: rgb(164,76,4);
+    font-family: 'Shadows Into Light', cursive;
+    font-size: 2em;
 }
 
 .hiking-button {

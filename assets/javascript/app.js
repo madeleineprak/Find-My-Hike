@@ -8,16 +8,10 @@ var lat, long, searchInput;
         url: `https://maps.googleapis.com/maps/api/geocode/json?address=${searchInput},+${state}&key=AIzaSyDOY9Oyx6yzfqzGEky4rj7bUi31kovFk5k`,
         success: function(response) {   
         // lat = response.results[0].locations[0].latLng.lat;
-        // long = response.results[0].locations[0].latLng.lng;
-        console.log(response);  
+        // long = response.results[0].locations[0].latLng.lng;        
         var results = response.results[0].geometry.location;
         lat = results.lat;
         long = results.lng;
-        console.log(response);
-        console.log(lat);
-        console.log(long);
-        console.log(searchInput);
-        console.log(state);           
         },
         error: error => console.log(error)  
     })
@@ -44,8 +38,7 @@ function getHikeDetails(ID){
     return $.ajax({
         url: `https://cors-anywhere.herokuapp.com/https://www.hikingproject.com/data/get-trails-by-id?ids=${ID}&key=200585860-f4494d9d7cf44d6a85f6bfd15f2a7061`,
         success: response => {
-            var trails = response.trails[0];
-            console.log("get hike details working");
+            var trails = response.trails[0];            
             $("#title-input").text(trails.name);
             $("#rating-input").text(`${trails.stars}/5`);
             if(trails.difficulty === "green"){
@@ -68,8 +61,7 @@ function getHikeDetails(ID){
 
 /*Map API and AJAX Request */
 //Bug present that doesnt let user type in starting point and map. I think ajax call needed for that?
-function getDirections(lat, long) {
-    console.log("directions working");
+function getDirections(lat, long) {   
     //need to make this so that if no map exists, do the below, else skip.
       L.mapquest.key = 'OlA3XD01BeVa2IeDq2kLC4Y4Cr3IDWMw';
       var map = L.mapquest.map('map', {
@@ -198,13 +190,13 @@ function getWeatherForecast(lat, long){
 /* YELP API */
 function getYelp(lat, long) {
     return $.ajax({
-        url: `https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?categories=restaurants&latitude=${lat}&longitude=${long}&radius=5000&limit=10`,
+        url: `https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?categories=restaurants&latitude=${lat}&longitude=${long}&radius=15000&limit=10`,
         headers: {
             "Authorization": "Bearer U4zPieXnsduH4Rg3NZDZvSSMzQmAwTZqI8wc1JEwROAUknwL15_b6FiWNlkhZCMhNTBJNTm2ZzctwONE9rEob9e6DuAoCv2zUH2fO29eDglEb6F1UGIC_ILc--l7XXYx"
         },
-        success: response => {
-            console.log("yelp working");
+        success: response => {            
             var business = response.businesses;
+            //if none, return "no restaurants within 10 miles"
             for(var i = 0; i < response.businesses.length; i++){
                 $("#yelp-input").append(`<a href=${business[i].url}>${business[i].name}</a><span> , ${business[i].location.city} </span>`)
             }
@@ -229,39 +221,32 @@ $("#submit-button").on("click", function(){
     $("#results-here").empty();
     emptyResults();    
     searchInput = $("#term").val();  
-    var state = $("#states option:selected").text();        
-    console.log(state); 
-    $.when(getLatLong(searchInput, state)).then(function(){
-        console.log(lat);
-        console.log(long);    
+    var state = $("#states option:selected").text();    
+    $.when(getLatLong(searchInput, state)).then(function(){        
         getHikingProject(lat, long); 
         $("form").trigger("reset");        
     });   
 });
-
 $(document).on("click", ".hiking-button", function(event) {  
     $("#hike-display").css("visibility", "visible");
     emptyResults();      
     // map.remove();
     var hikeID = $(this).attr("data-id");  
     var hikeLat = $(this).attr("data-lat");
-    var hikeLong = $(this).attr("data-long");
-    console.log(hikeID);    
+    var hikeLong = $(this).attr("data-long"); 
     getYelp(hikeLat, hikeLong);
     getWeatherForecast(hikeLat, hikeLong);
     getWeather(hikeLat, hikeLong);
     getHikeDetails(hikeID);  
     getDirections(hikeLat, hikeLong);       
 });
-
-$("#sidebarCollapse").on("click", function () {
-  $("#sidebar").toggleClass("active");
-  if($("list-unstyled").css("visibility") === "visible"){
-    $("list-unstyled").css("visibility", "hidden");
-  } else {
-    $("list-unstyled").css("visibility", "visible");
-  }
-});
-
+$(".openbtn").on("click", function(){
+  $("#mySidebar").css("width", "250px");
+  $("#main").css("margin-left", "250px");
+})
+$(".closebtn").on("click", function(){
+  $("#mySidebar").css("width", "0");
+  $("#main").css("margin-left", "0");
+})
 });
 
