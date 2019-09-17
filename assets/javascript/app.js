@@ -93,90 +93,90 @@ function getHikeDetails(ID) {
   })
 };
 /*Map API and AJAX Request */ 
-function getDirections(lat, long) {
-//need to make this so that if no map exists, do the below, else skip.
-L.mapquest.key = 'OlA3XD01BeVa2IeDq2kLC4Y4Cr3IDWMw';
-var map = L.mapquest.map('map', {
-  center: [lat, long],
-  layers: L.mapquest.tileLayer('map'),
-  zoom: 20,
-  zoomControl: false
-});
-L.control.zoom({
-  position: 'topright'
-}).addTo(map);
-L.mapquest.directionsControl({
-  directions: {
-    options: {
-      timeOverage: 25,
-      doReverseGeocode: false,
-    }
-  },
-  directionsLayer: {
-    startMarker: {
-      draggable: true,
-      icon: 'marker-start',
-      iconOptions: {},
-    },
-    endMarker: {
-      draggable: true,
-      icon: 'marker-end',
-      iconOptions: {},
-    },
-    routeRibbon: {
-      showTraffic: true
-    },
-    alternateRouteRibbon: {
-      showTraffic: true
-    },
-    paddingTopLeft: [450, 20],
-    paddingBottomRight: [20, 20],
-  },
-  startInput: {
-    compactResults: true,
-    disabled: false,
-    location: {},
-    placeholderText: 'Starting point or click on the map...',
-    geolocation: {
-      enabled: true
-    }
-  },
-  endInput: {
-    compactResults: true,
-    disabled: false,
-    location: {
-      latLng: {
-        lat: lat,
-        lng: long
-      }
-    },
-    placeholderText: 'Destination',
-    geolocation: {
-      enabled: false
-    }
-  },
-  addDestinationButton: {
-    enabled: true,
-    maxLocations: 10,
-  },
-  routeTypeButtons: {
-    enabled: true,
-  },
-  reverseButton: {
-    enabled: true,
-  },
-  optionsButton: {
-    enabled: true,
-  },
-  routeSummary: {
-    enabled: false,
-  },
-  narrativeControl: {
-    enabled: true,
-    compactResults: false,
-    interactive: true,
-  },
-}).addTo(map);
+function getDirections(lat, long) {   
+  //need to make this so that if no map exists, do the below, else skip.
+  L.mapquest.key = 'OlA3XD01BeVa2IeDq2kLC4Y4Cr3IDWMw';
+  var map = L.mapquest.map('map', {
+    center: [lat, long],
+    layers: L.mapquest.tileLayer('map'),      
+    zoom: 13,
+    zoomControl: false
+  }); 
+  L.control.zoom({
+    position: 'topright'
+  }).addTo(map);
+  L.mapquest.directionsControl({        
+      directions: {
+        options: {
+          timeOverage: 25,
+          doReverseGeocode: false,
+        }
+      },
+      directionsLayer: {
+        startMarker: {
+          draggable: true,
+          icon: 'marker-start',
+          iconOptions: {},
+        },
+        endMarker: {
+          draggable: true,
+          icon: 'marker-end',
+          iconOptions: {},
+        },
+        routeRibbon: {
+          showTraffic: true
+        },
+        alternateRouteRibbon: {
+          showTraffic: true
+        },
+        paddingTopLeft: [450, 20],
+        paddingBottomRight: [20, 20],
+      },
+      startInput: {
+        compactResults: true,
+        disabled: false,
+        location: {},
+        placeholderText: 'Starting point or click on the map...',
+        geolocation: {
+          enabled: true
+        }
+      },
+      endInput: {
+        compactResults: true,
+        disabled: false,
+        location: {
+           latLng: {
+               lat: lat,
+               lng: long
+           } 
+          },
+        placeholderText: 'Destination',
+        geolocation: {
+          enabled: false
+        }
+      },
+      addDestinationButton: {
+        enabled: true,
+        maxLocations: 10,
+      },
+      routeTypeButtons: {
+        enabled: true,
+      },
+      reverseButton: {
+        enabled: true,
+      },
+      optionsButton: {
+        enabled: true,
+      },
+      routeSummary: {
+        enabled: false,
+      },
+      narrativeControl: {
+        enabled: true,
+        compactResults: false,
+        interactive: true,
+      },
+    }).addTo(map);
 }
 /* OpenWeather API FORECAST AJAX Request*/
 function getWeather(lat, long){
@@ -212,13 +212,13 @@ function getWeatherForecast(lat, long){
     return $.ajax({
         url: `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&appid=2d017a4453be6f15af1c818bb7e28d02`,
         success: response => {                     
+>>>>>>> master
             var forecast = response.list[0].weather[0].description;        
             $("#weather-input").append(`<span>Today's forecast: ${forecast}</span><div>`);        
         },
         error: error => console.log(error)
     })
 }
-
 /* YELP API */
 function getYelp(lat, long) {
   return $.ajax({
@@ -246,6 +246,10 @@ function emptyResults() {
   $("#yelp-input").empty();
   $("#directions-input").empty();
   $("#distance-input").empty();
+  // startInput.empty();
+  // endInput.empty();
+  // startInput.text("");
+  // endInput.text("");
  }
 /* Event Listeners*/
 //on submit....
@@ -261,7 +265,7 @@ $("#submit-button").on("click", function(event){
     var instance = $('#term').parsley();
     if(instance.isValid()){
       $("#results-here").empty();
-      emptyResults();    
+      emptyResults();            
       searchInput = $("#term").val();  
       var state = $("#states option:selected").text();    
       $.when(getLatLong(searchInput, state)).then(function(){        
@@ -273,8 +277,11 @@ $("#submit-button").on("click", function(event){
 $(document).on("click", ".hiking-button", function(event) {  
     event.preventDefault();
     $("#hike-display").css("visibility", "visible");
-    emptyResults();
-    // map.remove();
+    emptyResults();    
+     // if (map){
+      // //  map.remove() ; 
+      // }
+      // // map.remove() ; 
     var hikeID = $(this).attr("data-id");
     var hikeLat = $(this).attr("data-lat");
     var hikeLong = $(this).attr("data-long");
@@ -285,7 +292,3 @@ $(document).on("click", ".hiking-button", function(event) {
     getDirections(hikeLat, hikeLong);
   });
 });
-
-
-
-
