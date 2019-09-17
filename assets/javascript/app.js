@@ -25,8 +25,8 @@ function getHikingProject(lat, long){
                 this.hikesArray = response.trails;
                 var hike = response.trails[i];
                 var hikeButton = $("<button>");
-                hikeButton.attr("data-name", hike.name).attr("data-id", hike.id).attr("data-lat", hike.latitude).attr("data-long", hike.longitude);              
-                hikeButton.addClass("hiking-button");
+                hikeButton.attr("data-name", hike.name).attr("data-id", hike.id).attr("data-lat", hike.latitude).attr("data-long", hike.longitude).attr("type", "button");              
+                hikeButton.addClass("hiking-button").addClass("btn btn-light btn-outline-dark");
                 hikeButton.text(hike.name);           
                 $("#results-here").append(hikeButton);
             }
@@ -39,7 +39,7 @@ function getHikeDetails(ID){
         url: `https://cors-anywhere.herokuapp.com/https://www.hikingproject.com/data/get-trails-by-id?ids=${ID}&key=200585860-f4494d9d7cf44d6a85f6bfd15f2a7061`,
         success: response => {
             var trails = response.trails[0];            
-            $("#title-input").text(trails.name);
+            $(".title-input").text(trails.name);
             $("#rating-input").text(`${trails.stars}/5`);
             if(trails.difficulty === "green"){
                 $("#difficulty-input").text("easy");
@@ -52,8 +52,9 @@ function getHikeDetails(ID){
             } else {
                 $("#difficulty-input").text("unknown");
             };
-            $("#description-input").text(trails.summary).append(`<a href=${trails.url}> more info </a>`);
-            $("#image-input").attr("src", trails.imgSqSmall);   //need to add default if no image  
+            $("#description-input").text(trails.summary).append(`<a href=${trails.url}> Click for more info.</a>`);
+            $("#image-input").attr("src", trails.imgMedium);   //need to add default if no image  
+            $("#distance-input").text(trails.length + " mi")
     },
         error: error => console.log(error)
     })
@@ -198,7 +199,7 @@ function getYelp(lat, long) {
             var business = response.businesses;
             //if none, return "no restaurants within 10 miles"
             for(var i = 0; i < response.businesses.length; i++){
-                $("#yelp-input").append(`<a href=${business[i].url}>${business[i].name}</a><span> , ${business[i].location.city} </span>`)
+                $("#yelp-input").append(`<li><a href=${business[i].url}>${business[i].name}</a><span> , ${business[i].location.city} </span></li>`)
             }
         },
         error: error => console.log(error)
@@ -213,11 +214,18 @@ function emptyResults(){
     $("#description-input").empty();
     $("#image-input").empty();
     $("#yelp-input").empty();
+    $("#directions-input").empty();
+    $("#distance-input").empty();
 }
 /* Event Listeners*/
 //on submit....
-$("#submit-button").on("click", function(){
+$("#submit-button").on("click", function(event){
     event.preventDefault();
+    var instance = $("#term").parsley();
+console.log(instance.isValid());
+//  $("#search-form").validate();
+//  $("#search-form").isValid();
+instance.isValid();
     $("#results-here").empty();
     emptyResults();    
     searchInput = $("#term").val();  
@@ -228,6 +236,7 @@ $("#submit-button").on("click", function(){
     });   
 });
 $(document).on("click", ".hiking-button", function(event) {  
+    event.preventDefault();
     $("#hike-display").css("visibility", "visible");
     emptyResults();      
     // map.remove();
@@ -235,7 +244,7 @@ $(document).on("click", ".hiking-button", function(event) {
     var hikeLat = $(this).attr("data-lat");
     var hikeLong = $(this).attr("data-long"); 
     getYelp(hikeLat, hikeLong);
-    getWeatherForecast(hikeLat, hikeLong);
+    // getWeatherForecast(hikeLat, hikeLong);
     getWeather(hikeLat, hikeLong);
     getHikeDetails(hikeID);  
     getDirections(hikeLat, hikeLong);       
@@ -249,4 +258,7 @@ $(".closebtn").on("click", function(){
   $("#main").css("margin-left", "0");
 })
 });
+
+
+
 
