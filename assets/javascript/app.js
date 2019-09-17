@@ -211,8 +211,7 @@ function getWeather(lat, long){
 function getWeatherForecast(lat, long){
     return $.ajax({
         url: `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&appid=2d017a4453be6f15af1c818bb7e28d02`,
-        success: response => {                     
->>>>>>> master
+        success: response => {  
             var forecast = response.list[0].weather[0].description;        
             $("#weather-input").append(`<span>Today's forecast: ${forecast}</span><div>`);        
         },
