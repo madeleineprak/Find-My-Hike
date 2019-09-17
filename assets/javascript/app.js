@@ -25,8 +25,8 @@ function getHikingProject(lat, long){
                 this.hikesArray = response.trails;
                 var hike = response.trails[i];
                 var hikeButton = $("<button>");
-                hikeButton.attr("data-name", hike.name).attr("data-id", hike.id).attr("data-lat", hike.latitude).attr("data-long", hike.longitude);              
-                hikeButton.addClass("hiking-button");
+                hikeButton.attr("data-name", hike.name).attr("data-id", hike.id).attr("data-lat", hike.latitude).attr("data-long", hike.longitude).attr("type", "button");              
+                hikeButton.addClass("hiking-button").addClass("btn btn-light btn-outline-dark");
                 hikeButton.text(hike.name);           
                 $("#results-here").append(hikeButton);
             }
@@ -39,7 +39,7 @@ function getHikeDetails(ID){
         url: `https://cors-anywhere.herokuapp.com/https://www.hikingproject.com/data/get-trails-by-id?ids=${ID}&key=200585860-f4494d9d7cf44d6a85f6bfd15f2a7061`,
         success: response => {
             var trails = response.trails[0];            
-            $("#title-input").text(trails.name);
+            $(".title-input").text(trails.name);
             $("#rating-input").text(`${trails.stars}/5`);
             if(trails.difficulty === "green"){
                 $("#difficulty-input").text("easy");
@@ -52,8 +52,9 @@ function getHikeDetails(ID){
             } else {
                 $("#difficulty-input").text("unknown");
             };
-            $("#description-input").text(trails.summary).append(`<a href=${trails.url}> more info </a>`);
-            $("#image-input").attr("src", trails.imgSqSmall);   //need to add default if no image  
+            $("#description-input").text(trails.summary).append(`<a href=${trails.url}> Click for more info.</a>`);
+            $("#image-input").attr("src", trails.imgMedium);   //need to add default if no image  
+            $("#distance-input").text(trails.length + " mi")
     },
         error: error => console.log(error)
     })
@@ -146,35 +147,7 @@ function getDirections(lat, long) {
         },
       }).addTo(map);
 }
-/* OpenWeather API AJAX Request*/
-function getWeather(lat, long){
-    return $.ajax({
-        url: `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=2d017a4453be6f15af1c818bb7e28d02`,
-        success: response => {     
-            console.log("weather working");    
-            var weather = response.weather[0].description;
-            var icon = response.weather[0].icon;
-            var temp = response.main.temp;
-            var tempF = Math.round(convert(temp));            
-            var sunrise = response.sys.sunrise;
-            var sunset = response.sys.sunset;
-            function convert(K){
-                var F = (K - 273.15) * 1.80 + 32;
-                return F;
-            }
-            function convertTime(T){
-                var dt = new Date(T * 1000);
-                var hr = dt.getHours();
-                var m = "0" + dt.getMinutes();           
-                return `${hr}:${m.substr(-2)}`;   
-            }      
-            var sunsetConvert = convertTime(sunset);    
-            var sunriseConvert = convertTime(sunrise);        
-            $("#weather-input").append(`<img src="assets/images/${icon}.png" alt="weather icon" width="60" height="60"><span>${weather}</span><div>Sunrise: ${sunriseConvert}</div><div>Sunset:${sunsetConvert}</div><div>Temp: ${tempF}&#8457</div>`);        
-        },
-        error: error => console.log(error)
-    })
-}
+
 /* OpenWeather API FORECAST AJAX Request*/
 function getWeatherForecast(lat, long){
     return $.ajax({
@@ -198,7 +171,7 @@ function getYelp(lat, long) {
             var business = response.businesses;
             //if none, return "no restaurants within 10 miles"
             for(var i = 0; i < response.businesses.length; i++){
-                $("#yelp-input").append(`<a href=${business[i].url}>${business[i].name}</a><span> , ${business[i].location.city} </span>`)
+                $("#yelp-input").append(`<li><a href=${business[i].url}>${business[i].name}</a><span> , ${business[i].location.city} </span></li>`)
             }
         },
         error: error => console.log(error)
@@ -213,9 +186,12 @@ function emptyResults(){
     $("#description-input").empty();
     $("#image-input").empty();
     $("#yelp-input").empty();
+    $("#directions-input").empty();
+    $("#distance-input").empty();
 }
 /* Event Listeners*/
 //on submit....
+
 // $("#search-form").parsley();
 $(function() {
   $("#search-form").parsley().on("field:validated", function(){
@@ -229,8 +205,14 @@ $(function() {
   });
 });
 
-$("#submit-button").on("click", function(){
+$("#submit-button").on("click", function(event){
+
     event.preventDefault();
+    var instance = $("#term").parsley();
+console.log(instance.isValid());
+//  $("#search-form").validate();
+//  $("#search-form").isValid();
+instance.isValid();
     $("#results-here").empty();
     emptyResults();    
     searchInput = $("#term").val();  
@@ -241,6 +223,7 @@ $("#submit-button").on("click", function(){
     });   
 });
 $(document).on("click", ".hiking-button", function(event) {  
+    event.preventDefault();
     $("#hike-display").css("visibility", "visible");
     emptyResults();      
     // map.remove();
@@ -248,7 +231,7 @@ $(document).on("click", ".hiking-button", function(event) {
     var hikeLat = $(this).attr("data-lat");
     var hikeLong = $(this).attr("data-long"); 
     getYelp(hikeLat, hikeLong);
-    getWeatherForecast(hikeLat, hikeLong);
+    // getWeatherForecast(hikeLat, hikeLong);
     getWeather(hikeLat, hikeLong);
     getHikeDetails(hikeID);  
     getDirections(hikeLat, hikeLong);       
@@ -262,4 +245,7 @@ $(".closebtn").on("click", function(){
   $("#main").css("margin-left", "0");
 })
 });
+
+
+
 
