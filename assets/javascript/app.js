@@ -147,35 +147,7 @@ function getDirections(lat, long) {
         },
       }).addTo(map);
 }
-/* OpenWeather API AJAX Request*/
-function getWeather(lat, long){
-    return $.ajax({
-        url: `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=2d017a4453be6f15af1c818bb7e28d02`,
-        success: response => {     
-            console.log("weather working");    
-            var weather = response.weather[0].description;
-            var icon = response.weather[0].icon;
-            var temp = response.main.temp;
-            var tempF = Math.round(convert(temp));            
-            var sunrise = response.sys.sunrise;
-            var sunset = response.sys.sunset;
-            function convert(K){
-                var F = (K - 273.15) * 1.80 + 32;
-                return F;
-            }
-            function convertTime(T){
-                var dt = new Date(T * 1000);
-                var hr = dt.getHours();
-                var m = "0" + dt.getMinutes();           
-                return `${hr}:${m.substr(-2)}`;   
-            }      
-            var sunsetConvert = convertTime(sunset);    
-            var sunriseConvert = convertTime(sunrise);        
-            $("#weather-input").append(`<img src="assets/images/${icon}.png" alt="weather icon" width="60" height="60"><span>${weather}</span><div>Sunrise: ${sunriseConvert}</div><div>Sunset:${sunsetConvert}</div><div>Temp: ${tempF}&#8457</div>`);        
-        },
-        error: error => console.log(error)
-    })
-}
+
 /* OpenWeather API FORECAST AJAX Request*/
 function getWeatherForecast(lat, long){
     return $.ajax({
@@ -219,7 +191,22 @@ function emptyResults(){
 }
 /* Event Listeners*/
 //on submit....
+
+// $("#search-form").parsley();
+$(function() {
+  $("#search-form").parsley().on("field:validated", function(){
+  var ok = $(".parsley-error").length === 0;
+  $(".bs-callout-info").toggleClass("hidden", !ok);
+  $('.bs-callout-warning').toggleClass('hidden', ok);
+  }).on("form:submit", function(){
+  var ok = $(".parsley-error").length === 0;
+  $(".bs-callout-info").toggleClass("hidden", !ok);
+  $('.bs-callout-warning').toggleClass('hidden', ok);
+  });
+});
+
 $("#submit-button").on("click", function(event){
+
     event.preventDefault();
     var instance = $("#term").parsley();
 console.log(instance.isValid());
