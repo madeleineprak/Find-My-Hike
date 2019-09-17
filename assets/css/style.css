@@ -2,29 +2,108 @@
  taupe/gray: #80766f rgb(128,118,111)
  beige: #b1976a rgb(177,151,106)
  dark green: 373e2a rgb(55,62,42)
- orange: a44c04 rgb(164,76,4)
+ orange: rgb(164,76,4)
  bright green: 2c4c04 rgb(44,76,4)
 */
 
 /* GLobal styles
 --------------------*/
+* {
+    box-sizing: border-box;
+  }
 body{
-    background-image: url("../images/background.jpg"); /* Photo by Galen Crout on Unsplash */
-    background-size: cover;
-    color: #383838;        
+    /* background-image: url("../images/background.jpg"); Photo by Galen Crout on Unsplash */
+    /* background-size: cover; */
+    color: rgb(15, 14, 14);        
     font-size: 1em; 
     font-family:'Bree Serif', serif;;
- }
+    height: 100%;
+    position: relative;
+    background-image: url("../images/background.jpg");
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 
- h2 {
+h3 {
+    font-size: 1.5em;
+}
+
+h2 {
      font-size: 1em;
      font-weight: 600;      
- }
+}
 
- h1{
-     color: #a44c04;
-     font-weight: 400; 
- }
+h1{
+     color: rgb(55,62,42);
+     font-weight: 600;
+     font-size: 5em;  
+     font-family: 'Shadows Into Light', cursive;
+}
+
+a {
+    color: rgb(55,62,42);
+    font-weight: 500;
+}
+
+
+/* Sidebar styles
+--------------------*/
+.sidebar {
+height: 100%;
+width: 0;
+position: fixed;
+z-index: 1;
+top: 0;
+right: 0;
+background-color: rgba(164,76,4, 0.5);
+overflow-x: hidden;
+transition: 0.5s;
+padding-top: 60px;
+}
+  
+.sidebar a {
+padding: 8px 8px 8px 32px;
+text-decoration: none;
+font-size: 25px;
+color: rgb(15, 14, 14);
+display: block;
+transition: 0.3s;
+}
+
+.sidebar a:hover {
+color: #f1f1f1;
+}
+  
+.sidebar .closebtn {
+position: absolute;
+top: 0;
+right: 80%;
+font-size: 3em;
+margin-left: 50px;
+}
+
+.openbtn {
+cursor: pointer;
+background-color: rgb(164,76,4);
+color: white;
+padding: 5px;
+border: none;
+height: 100%;
+}
+  
+.openbtn:hover {
+background-color: #444;
+}
+
+#main {
+transition: margin-left .5s;
+}
+
+.custom-checkbox{
+    margin-left: 10px;
+}
 
 /* Headers styles
 --------------------*/
@@ -32,43 +111,63 @@ header {
     margin-left: 0px;
     margin-right: 0px;
     padding: 0;
-    width: 100%;    
+    width: 100%;      
 }
 
- .jumbotron {
-     background-color: rgba(128,118,111, 0.5);     
- }
- 
- i {
-     margin-right: 10px;
-     color: rgb(55,62,42)
- }
- .circle-icon {
-    background: rgba(255, 255, 255, 0.25);
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    text-align: center;
-    line-height: 50px;
-    vertical-align: middle;
-    padding: 10px;
- }
+.jumbotron {
+     background-color: rgba(128,118,111, 0.5);   
+}
+
+@media (min-width: 576px) {
+    .jumbotron {
+      padding: 1rem; 
+  }
+}
+
+i {
+    margin-right: 10px;
+    color: rgb(55,62,42)
+}
+
+.circle-icon {
+background-color: rgba(255, 255, 255, 0.25);
+width: 80px;
+height: 80px;
+border-radius: 50%;
+text-align: center;
+line-height: 50px;
+vertical-align: middle;
+padding: 10px;
+margin-top: 10px;
+}
 
 /* Main body styles
 --------------------*/
+#term {
+    width: 50%;
+}
 
-#rating, #description, #difficulty, #directions, #weather {
-    background-color: rgba(255, 255, 255, 0.25);
+#states{
+    width: 20%;
+    display: inline-block;
+    background-color: lightgrey;   
+}
+
+.layer {
+    background-color: rgba(255, 255, 255, 0.5);
     margin: 3px;
+    width: 100%;
+    
 }
 
 #hike-display{
-    visibility: visible; 
+    visibility: hidden; 
 }
 
 #submit-button{
     background-color: rgb(55,62,42);
     border: none;
+    height: 100%;
 }
 
 .circular-image {
@@ -80,13 +179,44 @@ header {
     border-radius: 50%;
 }
 
-img {
+#image-input {
     width: auto;
-    height: 100%;   
+    height: 100%;     
 }
 
-/* #title-input {
-   padding-top: 20%;
-   padding-bottom: 20%;
-} */
+#title-input {
+    color: rgb(164,76,4);
+    font-family: 'Shadows Into Light', cursive;
+    font-size: 2em;
+}
+
+.hiking-button {
+    font-size: 0.75em;
+    font-weight: 100;
+}
+
+#results-here {
+    margin: 0px;
+    padding: 0px;
+}
+#map {
+    overflow: auto;
+    width: 100%;
+    height: 500px;
+
+}
+
+/* Footer styles
+------------------- */
+footer {
+    background-color: rgba(128,118,111, 0.5);
+    margin-top: 20px;  
+    position: fixed;
+    bottom: 0;    
+    width: 100%;      
+}
+.footer-text {
+    color: black;   
+}
+
 
