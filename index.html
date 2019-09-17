@@ -15,6 +15,8 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <!-- Mapquest -->
     <link type="text/css" rel="stylesheet" href="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.css"/>
+    <!-- Parsley-->
+    <link rel="stylesheet" href="assets/css/parsley.css">
 </head>
 
 <body class="wrapper">
@@ -31,8 +33,8 @@
     <main role="main">          
     <div class="container">
         <div class="row">
-            <form id="search-form" class="col">  
-                <input type="text" id="term" placeholder="Search for a hike near...">   
+            <form id="search-form" class="col" data-parsley-validate>  
+                <input type="text" id="term" placeholder="Search for a hike near..." data-parsley-trigger="change" required="" minlength='2'>   
                 <select class="form-control" id="states">
                         <option value="1" selected>WA</option>
                         <option value="2">AL</option>
@@ -209,6 +211,7 @@
 <!-- // Scripts -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="assets/javascript/parsley.min.js"></script>
 <script src="assets/javascript/app.js"></script>
 <script src="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.js"></script>
 </body>

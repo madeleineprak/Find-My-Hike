@@ -216,6 +216,19 @@ function emptyResults(){
 }
 /* Event Listeners*/
 //on submit....
+// $("#search-form").parsley();
+$(function() {
+  $("#search-form").parsley().on("field:validated", function(){
+  var ok = $(".parsley-error").length === 0;
+  $(".bs-callout-info").toggleClass("hidden", !ok);
+  $('.bs-callout-warning').toggleClass('hidden', ok);
+  }).on("form:submit", function(){
+  var ok = $(".parsley-error").length === 0;
+  $(".bs-callout-info").toggleClass("hidden", !ok);
+  $('.bs-callout-warning').toggleClass('hidden', ok);
+  });
+});
+
 $("#submit-button").on("click", function(){
     event.preventDefault();
     $("#results-here").empty();
