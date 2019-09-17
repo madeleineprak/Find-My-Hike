@@ -1,14 +1,47 @@
 $(document).ready(function () {
 /* Global Variables */
 var lat, long, searchInput;
+ /* Title write effect*/
+function writeTitle(){
+  var ctx = $("canvas").get(0).getContext("2d");  
+  var dashLen = 220;
+  var dashOffset = dashLen;
+  var speed = 15;
+  var txt = "Find my Hike";
+  var x = 30;
+  var  i = 0;
+  var w = window.innerWidth;  
+  if(w < 768) {    
+    ctx.font = "26px 'Rock Salt', cursive"; 
+  } else {    
+    ctx.font = "35px 'Rock Salt', cursive"; 
+  } 
+  ctx.lineWidth = 2; ctx.lineJoin = "round"; ctx.globalAlpha = 1;
+  ctx.strokeStyle = ctx.fillStyle = "#373e2a";
+  (function loop() {
+    ctx.clearRect(x, 0, 60, 150);
+    ctx.setLineDash([dashLen - dashOffset, dashOffset - speed]); // create a long dash mask
+    dashOffset -= speed;                                         // reduce dash length
+    ctx.strokeText(txt[i], x, 90);                               // stroke letter
+  
+    if (dashOffset > 0) requestAnimationFrame(loop);             // animate
+    else {
+      ctx.fillText(txt[i], x, 90);                               // fill final letter
+      dashOffset = dashLen;                                      // prep next char
+      x += ctx.measureText(txt[i++]).width + ctx.lineWidth * Math.random();
+      ctx.setTransform(1, 0, 0, 1, 0, 3 * Math.random());        // random y-delta
+      ctx.rotate(Math.random() * 0.005);                         // random rotation
+      if (i < txt.length) requestAnimationFrame(loop);
+    }
+  })();
+}
+writeTitle();
 /* Lat and Long AJAX Request from MapQuest API */
 function getLatLong(searchInput, state) {
   return $.ajax({
     // url: `https://www.mapquestapi.com/geocoding/v1/address?key=ttL7KMim9EoyXL2nRjDSwVtMA5XImeGB&inFormat=kvp&outFormat=json&location=${searchInput}, ${state}&thumbMaps=false`,
     url: `https://maps.googleapis.com/maps/api/geocode/json?address=${searchInput},+${state}&key=AIzaSyDOY9Oyx6yzfqzGEky4rj7bUi31kovFk5k`,
-    success: function (response) {
-      // lat = response.results[0].locations[0].latLng.lat;
-      // long = response.results[0].locations[0].latLng.lng;        
+    success: function (response) {    
       var results = response.results[0].geometry.location;
       lat = results.lat;
       long = results.lng;

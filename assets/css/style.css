@@ -13,11 +13,33 @@ body{
     /* Photo by Galen Crout on Unsplash */
     background-size: cover;
     color: rgb(15, 14, 14);        
-    font-size: 1em; 
-    /* font-family:'Bree Serif', serif;; */
+    font-size: 0.75em;    
     font-family: "HKGroteskRegular", Roboto, sans-serif;
     height: 100%;
     position: relative;
+}
+
+@media (min-width: 768px){
+    body {
+        font-size: 1.5em;
+    }
+    #description-input, #weather-input {
+        font-size: 1rem;
+    }
+    .fa-tree {
+        margin-right: -30px;       
+    }
+    canvas {
+        margin-top: 20px;
+    }
+}
+
+h6 {
+    margin-bottom: 0px;
+}
+
+h5 {
+    font-size: 2em;
 }
 
 h3 {
@@ -29,11 +51,12 @@ h2 {
      font-weight: 600;      
 }
 
-h1{
+h1 {
      color: rgb(55,62,42);
      font-weight: 600;
-     font-size: 5em;  
-     font-family: "HKGroteskRegular", Roboto, sans-serif;
+     font-size: 2em;  
+     /* font-family: "HKGroteskRegular", Roboto, sans-serif; */
+     font-family: 'Rock Salt', cursive;
 }
 
 a {
@@ -41,17 +64,9 @@ a {
     font-weight: bolder;
 }
 
-
-
 .custom-checkbox{
     margin-left: 10px;
 }
-
-/* #image-input {
-    object-fit: cover;
-    width: 250px;
-    height: 250px;
-} */
 
 /* Headers styles
 --------------------*/
@@ -63,8 +78,7 @@ header {
 }
 
 .jumbotron {
-    background-color: rgba(255, 255, 255, 0.5);
-     /* background-color: rgba(128,118,111, 0.5);    */
+    background-color: rgba(255, 255, 255, 0.5);   
 }
 
 @media (min-width: 576px) {
@@ -73,24 +87,29 @@ header {
   }
 }
 
-i {
-    margin-right: 10px;
+i {   
+    margin-bottom: 30px;   
     color: rgb(55,62,42)
 }
+.fa-tree {
+    padding: 0px;
+    font-size: 3em;
+    margin-top: 65px;
+    margin-left: 50px;
+}
 
-.circle-icon {
-background-color: rgba(255, 255, 255, 0.25);
-width: 80px;
-height: 80px;
-border-radius: 50%;
-text-align: center;
-line-height: 50px;
-vertical-align: middle;
-padding: 10px;
+canvas {
+    padding: 0px;
+    /* width: 100%; */
 }
 
 /* Main body styles
 --------------------*/
+
+.col {
+    padding: 0px;
+}
+
 #term {
     width: 50%;
 }
@@ -111,33 +130,20 @@ padding: 10px;
     visibility: hidden; 
 }
 
+#search-form {
+    margin-left: 15px;
+}
+
 #submit-button{
     background-color: rgb(55,62,42);
     border: none;
     height: 100%;
 }
 
-.circular-image {
-    display: inline-block;
-    position: relative;
-    width: 100px;
-    height: 100px;
-    overflow: hidden;
-    border-radius: 50%;
-}
-
 #image-input {
-    /* width: auto;
-    height: 100%;      */
     height: 400px;
     object-fit: cover;
 }
-
-/* #title-input {
-    color: rgb(164,76,4);
-    font-family: 'Shadows Into Light', cursive;
-    font-size: 2em;
-} */
 
 .hiking-button {
     font-size: 0.75em;
@@ -155,66 +161,19 @@ padding: 10px;
     padding: 0px;
 }
 
-/* Footer styles
-------------------- */
-footer {
-    background-color: rgba(128,118,111, 0.5);
-    margin-top: 20px;  
-    position: absolute;
-    bottom: 0;    
-    width: 100%;      
-}
-.footer-text {
-    color: black;   
-}
-
 .title-input {
     font-weight: bolder;
-}
-
-/* Parsley CSS */
-input.parsley-success,
-select.parsley-success,
-textarea.parsley-success {
-  color: #468847;
-  background-color: #DFF0D8;
-  border: 1px solid #D6E9C6;
-}
-
-input.parsley-error,
-select.parsley-error,
-textarea.parsley-error {
-  color: #B94A48;
-  background-color: #F2DEDE;
-  border: 1px solid #EED3D7;
-}
-
-.parsley-errors-list {
-  margin: 2px 0 3px;
-  padding: 0;
-  list-style-type: none;
-  font-size: 0.9em;
-  line-height: 0.9em;
-  opacity: 0;
-  color: #B94A48;
-
-  transition: all .3s ease-in;
-  -o-transition: all .3s ease-in;
-  -moz-transition: all .3s ease-in;
-  -webkit-transition: all .3s ease-in;
-}
-
-.parsley-errors-list.filled {
-  opacity: 1;
 }
 
 .card-body {
     padding: 25px;
 }
+
 .detail-card {
     width: 200px;
     height: 200px;
 }
+
 .detail-title {
     color: darkslategray;
     font-weight: bold;
@@ -226,4 +185,21 @@ textarea.parsley-error {
 
 .nav-item {
     width:25%;
+}
+
+.nav-link {
+    padding: 10px 0px;
+}
+
+/* Footer styles
+------------------- */
+footer {
+    background-color: rgba(128,118,111, 0.5);
+    margin-top: 20px;  
+    position: absolute;
+    bottom: 0;    
+    width: 100%;      
+}
+.footer-text {
+    color: black;   
 }
