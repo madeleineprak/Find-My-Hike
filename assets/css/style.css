@@ -12,95 +12,67 @@
     box-sizing: border-box;
   }
 body{
-    /* background-image: url("../images/background.jpg"); Photo by Galen Crout on Unsplash */
-    /* background-size: cover; */
+    background-image: url("../images/tim-tiedemann-DmVDrTLFHBw-unsplash.jpg"); 
+    /* Photo by Galen Crout on Unsplash */
+    background-size: cover;
     color: rgb(15, 14, 14);        
-    font-size: 1em; 
-    font-family:'Bree Serif', serif;;
+    font-size: 0.75em;    
+    font-family: "HKGroteskRegular", Roboto, sans-serif;
     height: 100%;
     position: relative;
-    background-image: url("../images/background.jpg");
-    background-attachment: fixed;
+    /* background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: cover; */
+}
+
+@media (min-width: 768px){
+    body {
+        font-size: 1.5em;
+    }
+    #description-input, #weather-input {
+        font-size: 1rem;
+    }
+    .fa-tree {
+        margin-right: -30px;       
+    }
+    canvas {
+        margin-top: 20px;
+    }
+}
+
+h6 {
+    margin-bottom: 0px;
+}
+
+h5 {
+    font-size: 2em;
 }
 
 h3 {
     font-size: 1.5em;
 }
 
+>>>>>>> master
 h2 {
      font-size: 1em;
      font-weight: 600;      
 }
 
-h1{
+h1 {
      color: rgb(55,62,42);
      font-weight: 600;
-     font-size: 5em;  
-     font-family: 'Shadows Into Light', cursive;
+     font-size: 2em;  
+     /* font-family: "HKGroteskRegular", Roboto, sans-serif; */
+     font-family: 'Rock Salt', cursive;
 }
 
 a {
     color: rgb(55,62,42);
-    font-weight: 500;
+    font-weight: bolder;
 }
 
-
-/* Sidebar styles
---------------------*/
-.sidebar {
-height: 100%;
-width: 0;
-position: fixed;
-z-index: 1;
-top: 0;
-right: 0;
-background-color: rgba(164,76,4, 0.5);
-overflow-x: hidden;
-transition: 0.5s;
-padding-top: 60px;
-}
-  
-.sidebar a {
-padding: 8px 8px 8px 32px;
-text-decoration: none;
-font-size: 25px;
-color: rgb(15, 14, 14);
-display: block;
-transition: 0.3s;
-}
-
-.sidebar a:hover {
-color: #f1f1f1;
-}
-  
-.sidebar .closebtn {
-position: absolute;
-top: 0;
-right: 80%;
-font-size: 3em;
-margin-left: 50px;
-}
-
-.openbtn {
-cursor: pointer;
-background-color: rgb(164,76,4);
-color: white;
-padding: 5px;
-border: none;
-height: 100%;
-}
-  
-.openbtn:hover {
-background-color: #444;
-}
-
-#main {
-transition: margin-left .5s;
-}
-
+>>>>>>> master
 .custom-checkbox{
     margin-left: 10px;
 }
@@ -115,7 +87,7 @@ header {
 }
 
 .jumbotron {
-     background-color: rgba(128,118,111, 0.5);   
+    background-color: rgba(255, 255, 255, 0.5);  
 }
 
 @media (min-width: 576px) {
@@ -124,21 +96,21 @@ header {
   }
 }
 
-i {
-    margin-right: 10px;
+i {   
+    margin-bottom: 30px;   
     color: rgb(55,62,42)
 }
+.fa-tree {
+    padding: 0px;
+    font-size: 3em;
+    margin-top: 65px;
+    margin-left: 50px;
+}
 
-.circle-icon {
-background-color: rgba(255, 255, 255, 0.25);
-width: 80px;
-height: 80px;
-border-radius: 50%;
-text-align: center;
-line-height: 50px;
-vertical-align: middle;
-padding: 10px;
-margin-top: 10px;
+canvas {
+    padding: 0px;
+    /* width: 100%; */
+>>>>>>> master
 }
 
 /* Main body styles
@@ -147,6 +119,15 @@ margin-top: 10px;
     width: 50%;
 }
 
+.col {
+    padding: 0px;
+}
+
+#term {
+    width: 50%;
+}
+
+>>>>>>> master
 #states{
     width: 20%;
     display: inline-block;
@@ -157,11 +138,14 @@ margin-top: 10px;
     background-color: rgba(255, 255, 255, 0.5);
     margin: 3px;
     width: 100%;
-    
 }
 
 #hike-display{
     visibility: hidden; 
+}
+
+#search-form {
+    margin-left: 15px;
 }
 
 #submit-button{
@@ -170,53 +154,77 @@ margin-top: 10px;
     height: 100%;
 }
 
-.circular-image {
-    display: inline-block;
-    position: relative;
-    width: 100px;
-    height: 100px;
-    overflow: hidden;
-    border-radius: 50%;
-}
-
 #image-input {
-    width: auto;
-    height: 100%;     
-}
-
-#title-input {
-    color: rgb(164,76,4);
-    font-family: 'Shadows Into Light', cursive;
-    font-size: 2em;
+    height: 400px;
+    object-fit: cover;
 }
 
 .hiking-button {
     font-size: 0.75em;
     font-weight: 100;
+    margin: 5px;
+}
+
+/* #image-input {
+    width: auto;
+    height: 100%;     
+} */
+
+.hiking-button:active {
+    color: white;
+    background-color: black;
 }
 
 #results-here {
     margin: 0px;
     padding: 0px;
 }
+
+.title-input {
+    font-weight: bolder;
+}
+
+.card-body {
+    padding: 25px;
+}
+
+.detail-card {
+    width: 200px;
+    height: 200px;
+}
+
+.detail-title {
+    color: darkslategray;
+    font-weight: bold;
+}
+
+.card-content {
+    padding: 50px;
+}
+
+.nav-item {
+    width:25%;
+}
+
+.nav-link {
+    padding: 10px 0px;
+}
+
 #map {
     overflow: auto;
     width: 100%;
     height: 500px;
 
 }
-
 /* Footer styles
 ------------------- */
 footer {
     background-color: rgba(128,118,111, 0.5);
     margin-top: 20px;  
-    position: fixed;
+    position: absolute;
     bottom: 0;    
     width: 100%;      
 }
 .footer-text {
     color: black;   
 }
-
-
