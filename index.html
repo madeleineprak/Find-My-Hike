@@ -17,9 +17,15 @@
     <!--// author stylesheet-->
     <link rel="stylesheet" href="assets/css/style.css">
     <!-- Mapquest -->
-    <link type="text/css" rel="stylesheet" href="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.css"/>
+    <link type="text/css" rel="stylesheet" href="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.css" />
     <!-- Parsley-->
     <link rel="stylesheet" href="assets/css/parsley.css">
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
 
 </head>
 
@@ -29,14 +35,13 @@
         <!-- // Header -->
         <header class="jumbotron jumbotron-fluid">
             <div class="container" id="jumbo-container">
-                <h1><i class="fas fa-hiking circle-icon"></i>Find My Hike</h1>
+                <h1><i class="fas fa-tree circle-icon"></i></i>Find My Hike</h1>
 
             </div>
         </header>
 
         <!-- // Main section -->
         <main role="main">
-
             <div class="container">
                 <div class="row">
                     <form data-parsley-validate id="search-form" class="col">
@@ -96,12 +101,11 @@
                         <button type="submit" class="btn-sm btn-primary" id="submit-button"
                             value="validate">Submit</button>
                     </form>
-                   </div>
+                </div>
                 <br>
                 <div class="row">
                     <ul id="results-here">
                     </ul>
-
                 </div>
                 <br>
                 <div class="row" id="hike-display">
@@ -110,11 +114,11 @@
                             <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
                                 <li class="nav-item">
                                     <a class="nav-link active" id="info-tab" data-toggle="tab" href="#info" role="tab"
-                                        aria-controls="home" aria-selected="true">Hike Details</a>
+                                        aria-controls="home" aria-selected="true">Hike Information</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" id="direction-tab" data-toggle="tab" href="#directions-map"
-                                        role="tab" aria-controls="profile" aria-selected="false">Directions</a>
+                                        role="tab" aria-controls="profile" aria-selected="false">Get Directions</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" id="list-tab" data-toggle="tab" href="#packing-list" role="tab"
@@ -122,7 +126,7 @@
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" id="restaurant-tab" data-toggle="tab" href="#restaurants"
-                                        role="tab" aria-controls="contact" aria-selected="false">Food Nearby</a>
+                                        role="tab" aria-controls="contact" aria-selected="false">Nearby Restaurants</a>
                                 </li>
                             </ul>
                         </div>
@@ -130,35 +134,39 @@
                             <div class="tab-pane fade show active" id="info" role="tabpanel" aria-labelledby="info-tab">
 
                                 <div class="card-body container card-content">
-                                        <h5 class="title-input card-title">Hiking Details</h5>
-                                        <br>
+                                    <h5 class="title-input card-title">Hiking Details</h5>
+                                    <br>
                                     <div class="row">
                                         <div class="col-md-4 col-sm-12 col-xs-12">
                                             <div class="hike-image">
-                                                 <img id="image-input" src="" class="card-img-top rounded" alt="...">
+                                                <img id="image-input" src="" class="card-img-top rounded" alt="...">
                                             </div>
                                         </div>
                                         <div class="col-md-8 col-sm-12 col-xs-12">
-                                            
+
                                             <div class="container">
                                                 <div class="row">
-                                                    <div class="card col-6 detail-card align-items-center justify-content-center">
+                                                    <div
+                                                        class="card col-6 detail-card align-items-center justify-content-center">
                                                         <!-- <h6 class="detail-title">RATE</h6>
                                                         <div id="rating-input"></div> -->
                                                         <h6 class="detail-title">DISTANCE</h6>
                                                         <div id="distance-input"></div>
                                                     </div>
-                                                    <div class="card col-6 detail-card align-items-center justify-content-center">
+                                                    <div
+                                                        class="card col-6 detail-card align-items-center justify-content-center">
                                                         <h6 class="detail-title">DIFFICULTY</h6>
                                                         <div id="difficulty-input"></div>
                                                     </div>
                                                 </div>
                                                 <div class="row">
-                                                    <div class="card col-6 detail-card align-items-center justify-content-center">
+                                                    <div
+                                                        class="card col-6 detail-card align-items-center justify-content-center">
                                                         <h6 class="detail-title">DESCRIPTION</h6>
                                                         <div id="description-input"></div>
                                                     </div>
-                                                    <div class="card col-6 detail-card align-items-center justify-content-center">
+                                                    <div
+                                                        class="card col-6 detail-card align-items-center justify-content-center">
                                                         <h6 class="detail-title">WEATHER</h6>
                                                         <div id="weather-input"></div>
                                                     </div>
@@ -166,6 +174,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="row"></div>
                                 </div>
                             </div>
 
@@ -176,7 +185,7 @@
                                     <h5 class="title-input card-title">Directions</h5>
                                     <div id="directions">
                                         <span id="directions-input"></span>
-                                        <div id="map" style="width: 100%; height: 400px;"></div>
+                                        <div id="map" style="width: 100%; height: 600px;"></div>
                                     </div>
                                 </div>
                             </div>
@@ -185,50 +194,54 @@
                                 <div class="card-body text-left card-content">
                                     <br>
                                     <h5 class="title-input card-title text-center">Packing List</h5>
-                                    
-                                       
-            <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="item1">
-                <label class="custom-control-label" for="item1">Hiking backpack</label>
-            </div>
-            <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="item2">
-                <label class="custom-control-label" for="item2">Weather-appropriate clothing (think moisture-wicking and layers)</label>
-            </div>
-            <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="item3">
-                <label class="custom-control-label" for="item3">Hiking boots or shoes</label>
-            </div>
-            <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="item4">
-                <label class="custom-control-label" for="item4">Shoes for after the hike (store in car)</label>
-            </div>
-            <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="item5">
-                <label class="custom-control-label" for="item5">Plenty of food</label>
-            </div>
-            <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="item6">
-                <label class="custom-control-label" for="item6">Plenty of water</label>
-            </div>
-            <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="item7">
-                <label class="custom-control-label" for="item7">Navigation tools such as a map and compass</label>
-            </div>
-            <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="item8">
-                <label class="custom-control-label" for="item8">First-aid kit</label>
-            </div>
-            <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="item9">
-                <label class="custom-control-label" for="item9">Knife or multi-tool/label>
-            </div>
-            <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="item10">
-                <label class="custom-control-label" for="item10">Sun protection, weather-dependent</label>
-            </div>           
-  
-                                  
+
+
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="item1">
+                                        <label class="custom-control-label" for="item1">Hiking backpack</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="item2">
+                                        <label class="custom-control-label" for="item2">Weather-appropriate clothing
+                                            (think moisture-wicking and layers)</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="item3">
+                                        <label class="custom-control-label" for="item3">Hiking boots or shoes</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="item4">
+                                        <label class="custom-control-label" for="item4">Shoes for after the hike (store
+                                            in car)</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="item5">
+                                        <label class="custom-control-label" for="item5">Plenty of food</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="item6">
+                                        <label class="custom-control-label" for="item6">Plenty of water</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="item7">
+                                        <label class="custom-control-label" for="item7">Navigation tools such as a map
+                                            and compass</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="item8">
+                                        <label class="custom-control-label" for="item8">First-aid kit</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="item9">
+                                        <label class="custom-control-label" for="item9">Knife or multi-tool/label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="item10">
+                                        <label class="custom-control-label" for="item10">Sun protection,
+                                            weather-dependent</label>
+                                    </div>
+
+
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="restaurants" role="tabpanel"
@@ -249,7 +262,7 @@
         </main>
     </div>
 
-<!--     </main>
+    <!--     </main>
     <footer class="footer">
         <div class="container footer-text">
             <span>
@@ -272,6 +285,5 @@
 <script src="assets/javascript/parsley.min.js"></script>
 <script src="assets/javascript/app.js"></script>
 <script src="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.js"></script>
-
 </body>
 </html>
