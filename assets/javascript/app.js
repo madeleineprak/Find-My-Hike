@@ -93,10 +93,11 @@ function getHikeDetails(ID) {
   })
 };
 /*Map API and AJAX Request */ 
-function getDirections(lat, long) {   
+var map = null
+function getDirections(lat, long) {  
   //need to make this so that if no map exists, do the below, else skip.
   L.mapquest.key = 'OlA3XD01BeVa2IeDq2kLC4Y4Cr3IDWMw';
-  var map = L.mapquest.map('map', {
+  map = L.mapquest.map('map', {
     center: [lat, long],
     layers: L.mapquest.tileLayer('map'),      
     zoom: 13,
@@ -245,11 +246,7 @@ function emptyResults() {
   $("#yelp-input").empty();
   $("#directions-input").empty();
   $("#distance-input").empty();
-  // startInput.empty();
-  // endInput.empty();
-  // startInput.text("");
-  // endInput.text("");
- }
+}
 /* Event Listeners*/
 //on submit....
 $("#search-form").parsley().on("form:validate", function (){
@@ -276,11 +273,9 @@ $("#submit-button").on("click", function(event){
 $(document).on("click", ".hiking-button", function(event) {  
     event.preventDefault();
     $("#hike-display").css("visibility", "visible");
-    emptyResults();    
-     // if (map){
-      // //  map.remove() ; 
-      // }
-      // // map.remove() ; 
+    if (map !== undefined && map !== null) {
+    map.remove()};
+    emptyResults();
     var hikeID = $(this).attr("data-id");
     var hikeLat = $(this).attr("data-lat");
     var hikeLong = $(this).attr("data-long");
