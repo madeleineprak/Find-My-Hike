@@ -6,14 +6,14 @@
  bright green: 2c4c04 rgb(44,76,4)
 */
 
-/* GLobal styles
---------------------*/
+/* Global styles*/
 * {
     box-sizing: border-box;
-  }
-body{
-    background-image: url("../images/tim-tiedemann-DmVDrTLFHBw-unsplash.jpg"); 
-    /* Photo by Galen Crout on Unsplash */
+
+}
+
+body {
+    background-image: url("../images/tim-tiedemann-DmVDrTLFHBw-unsplash.jpg"); /* Photo by Galen Crout on Unsplash */
     background-size: cover;
     color: rgb(15, 14, 14);        
     font-size: 0.75em;    
@@ -36,6 +36,8 @@ body{
         margin-top: 20px;
     }
 }
+
+/* Heading tags */
 
 h6 {
     margin-bottom: 0px;
@@ -62,11 +64,6 @@ h1 {
      font-family: 'Rock Salt', cursive;
 }
 
-a {
-    color: rgb(55,62,42);
-    font-weight: bolder;
-}
-
 .custom-checkbox{
     margin-left: 10px;
 }
@@ -90,10 +87,18 @@ header {
   }
 }
 
+/* Main body styles */
+
 i {   
     margin-bottom: 30px;   
     color: rgb(55,62,42)
 }
+
+a {
+    color: rgb(55,62,42);
+    font-weight: bolder;
+}
+
 .fa-tree {
     padding: 0px;
     font-size: 3em;
@@ -103,11 +108,8 @@ i {
 
 canvas {
     padding: 0px;
-    /* width: 100%; */
 }
 
-/* Main body styles
---------------------*/
 #term {
     width: 50%;
 }
@@ -157,18 +159,14 @@ canvas {
     margin: 5px;
 }
 
-/* #image-input {
-    width: auto;
-    height: 100%;     
-} */
-
 .hiking-button:active {
     color: white;
     background-color: black;
 }
 
 #results-here {
-    margin: 0px;
+    margin-top: 10px;
+    margin-bottom: 10px;
     padding: 0px;
 }
 
@@ -208,15 +206,17 @@ canvas {
     height: 500px;
 
 }
-/* Footer styles
-------------------- */
+
+/* Footer styles */
+
 footer {
     background-color: rgba(128,118,111, 0.5);
     margin-top: 20px;  
-    position: absolute;
+    position: static;
     bottom: 0;    
     width: 100%;      
 }
+
 .footer-text {
     color: black;   
 }
