@@ -20,10 +20,6 @@ body{
     font-family: "HKGroteskRegular", Roboto, sans-serif;
     height: 100%;
     position: relative;
-    /* background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover; */
 }
 
 @media (min-width: 768px){

@@ -34,5 +34,4 @@ API's Used:
 * JavaScript
 * Bootstrap Framework
 * jQuery
-* Firebase Database
 * Parsley.js
