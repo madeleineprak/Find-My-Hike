@@ -211,10 +211,10 @@ canvas {
 
 footer {
     background-color: rgba(128,118,111, 0.5);
-    margin-top: 20px;  
-    position: static;
+    margin-top: 20px;   
     bottom: 0;    
-    width: 100%;      
+    width: 100%;   
+    position: fixed;   
 }
 
 .footer-text {
